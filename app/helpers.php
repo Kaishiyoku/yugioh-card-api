@@ -332,6 +332,10 @@ if (!function_exists('fetchLocaleSpecificCardFields')) {
 
         $cardText = count($boxDetails) >= 3 ? $boxDetails[2] : '';
 
+        if (count($boxDetails) == 1) {
+            $cardText = $boxDetails[0];
+        }
+
         return new \App\Entities\LocaleSpecificCard($title, $cardText);
     }
 }
