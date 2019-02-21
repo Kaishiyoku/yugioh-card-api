@@ -52,8 +52,9 @@ class TestYuGiOhCrawler extends Command
                 'level' => 8,
                 'monsterType' => 'Seeschlange',
                 'cardType' => 'Effekt',
-                'atk' => 1200,
-                'def' => 3000,
+                'atk' => '1200',
+                'def' => '3000',
+                'cardText' => 'Du kannst diese Karte in deiner Hand vorzeigen; dein Gegner bestimmt zufällig 1 Karte von deiner gesamten Hand, dann wirfst du die bestimmte Karte ab. Dann, falls die abgeworfene Karte nicht „Gefahr! Ogopogo!“ war, beschwöre 1 „Gefahr! Ogopogo!“ als Spezialbeschwörung von deiner Hand und falls du dies tust, ziehe 1 Karte. Falls diese Karte abgeworfen wird: Du kannst 1 „Gefahr!“-Karte von deinem Deck auf den Friedhof legen, außer „Gefahr! Ogopogo!“. Du kannst diesen Effekt von „Gefahr! Ogopogo!“ nur einmal pro Spielzug verwenden.',
             ],
             'spellCard' => [
                 'cardClass' => 'spell',
@@ -88,8 +89,9 @@ class TestYuGiOhCrawler extends Command
                 'level' => 8,
                 'monsterType' => 'Sea Serpent',
                 'cardType' => 'Effect',
-                'atk' => 1200,
-                'def' => 3000,
+                'atk' => '1200',
+                'def' => '3000',
+                'cardText' => 'You can reveal this card in your hand; your opponent randomly chooses 1 card from your entire hand, then you discard the chosen card. Then, if the discarded card was not "Danger! Ogopogo!", Special Summon 1 "Danger! Ogopogo!" from your hand, and if you do, draw 1 card. If this card is discarded: You can send 1 "Danger!" card from your Deck to the GY, except "Danger! Ogopogo!". You can only use this effect of "Danger! Ogopogo!" once per turn.',
             ],
             'spellCard' => [
                 'cardClass' => 'spell',
@@ -117,7 +119,7 @@ class TestYuGiOhCrawler extends Command
 
         if (count($monsterCardDiff) > 0) {
             $this->error('-> Monster card crawling failed:');
-            $this->error(print_r($monsterCardDiff));
+            $this->error(var_dump($monsterCardDiff));
         } else {
             $this->info('-> Monster card crawling succeeded.');
         }
@@ -126,7 +128,7 @@ class TestYuGiOhCrawler extends Command
 
         if (count($spellCardDiff) > 0) {
             $this->error('-> Spell card crawling failed:');
-            $this->error(print_r($spellCardDiff));
+            $this->error(var_dump($spellCardDiff));
         } else {
             $this->info('-> Spell card crawling succeeded.');
         }
@@ -135,7 +137,7 @@ class TestYuGiOhCrawler extends Command
 
         if (count($trapCardDiff) > 0) {
             $this->error('-> Trap card crawling failed:');
-            $this->error(print_r($trapCardDiff));
+            $this->error(var_dump($trapCardDiff));
         } else {
             $this->info('-> Trap card crawling succeeded.');
         }
@@ -187,10 +189,11 @@ class TestYuGiOhCrawler extends Command
         $level = intval($tabularDetails[1]);
         $monsterType = $boxDetails[0];
         $cardType = $boxDetails[1];
-        $atk = intval($tabularDetails[2]);
-        $def = intval($tabularDetails[3]);
+        $atk = $tabularDetails[2];
+        $def = $tabularDetails[3];
+        $cardText = $boxDetails[2];
 
-        return compact('cardClass', 'title', 'attribute', 'level', 'monsterType', 'cardType', 'atk', 'def');
+        return compact('cardClass', 'title', 'attribute', 'level', 'monsterType', 'cardType', 'atk', 'def', 'cardText');
     }
 
     private function fetchSpell($cardUrl, $lang)
