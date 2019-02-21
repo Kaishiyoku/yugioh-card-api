@@ -2,11 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Entities\SetCard;
 use App\Entities\SetLink;
-use App\Models\MonsterCard;
-use App\Models\SpellCard;
-use App\Models\TrapCard;
+use App\Jobs\ProcessSetLink;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
@@ -47,24 +44,7 @@ class YuGiOhCrawlCards extends Command
         $setLinks->each(function (SetLink $item) use ($baseUrl) {
             $this->info('crawling set "' . $item->getTitle() . '"');
 
-            $setCards = fetchSetCards($baseUrl, $item->getUrl());
-
-            $cards = $setCards->map(function (SetCard $item) {
-                return fetchCard($item->getAttribute(), $item->getUrl(), $this);
-            });
-
-            $cards->each(function ($item) {
-                $className = get_class($item);
-                $foundCard = $className::whereTitleGerman($item->title_german)->whereTitleEnglish($item->title_english)->first();
-
-                if (empty($foundCard)) {
-                    $item->save();
-                } else {
-                    $foundCard->fill($item->toArray());
-
-                    $foundCard->save();
-                }
-            });
+            ProcessSetLink::dispatch($baseUrl, $item);
         });
     }
 }
