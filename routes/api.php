@@ -13,7 +13,9 @@
 
 Route::prefix('v1')->middleware('api')->group(function () {
     Route::get('/health_check', 'Api\v1\HomeController@healthCheck');
-    Route::get('/version', 'Api\v1\HomeCOntroller@version');
+    Route::get('/version', 'Api\v1\HomeController@version');
+
+    Route::get('/cards', 'Api\v1\CardController@index');
 });
 
 Route::fallback(function () {
