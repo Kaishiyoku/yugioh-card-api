@@ -4,6 +4,43 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\MonsterCard
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Set[] $sets
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard query()
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $title_german
+ * @property string $title_english
+ * @property string $attribute
+ * @property int $level
+ * @property string $monster_type
+ * @property string $card_type
+ * @property string $atk
+ * @property string $def
+ * @property string $card_text_german
+ * @property string $card_text_english
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereAtk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereAttribute($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereCardTextEnglish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereCardTextGerman($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereCardType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereDef($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereMonsterType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereTitleEnglish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereTitleGerman($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereUpdatedAt($value)
+ * @property string $url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereUrl($value)
+ */
 class MonsterCard extends Model
 {
     /**
@@ -22,6 +59,7 @@ class MonsterCard extends Model
         'def',
         'card_text_german',
         'card_text_english',
+        'url',
     ];
 
     public function sets()

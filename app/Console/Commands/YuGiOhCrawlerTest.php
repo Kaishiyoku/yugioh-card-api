@@ -4,8 +4,6 @@ namespace App\Console\Commands;
 
 use Diff\Differ\MapDiffer;
 use Illuminate\Console\Command;
-use Symfony\Component\CssSelector\CssSelectorConverter;
-use Symfony\Component\DomCrawler\Crawler;
 
 class YuGiOhCrawlerTest extends Command
 {
@@ -39,9 +37,9 @@ class YuGiOhCrawlerTest extends Command
     private function testInGerman($baseUrl)
     {
         $actual = [
-            'monsterCard' => $this->fetchCard('MONSTER', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351', 'de'),
-            'spellCard' => $this->fetchCard('ZAUBER', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134', 'de'),
-            'trapCard' => $this->fetchCard('FALLE', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148', 'de'),
+            'monsterCard' => fetchCard('MONSTER', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351', 'de'),
+            'spellCard' => fetchCard('ZAUBER', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134', 'de'),
+            'trapCard' => fetchCard('FALLE', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148', 'de'),
         ];
 
         $expected = [
@@ -76,9 +74,9 @@ class YuGiOhCrawlerTest extends Command
     private function testInEnglish($baseUrl)
     {
         $actual = [
-            'monsterCard' => $this->fetchCard('MONSTER', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351', 'en'),
-            'spellCard' => $this->fetchCard('SPELL', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134', 'en'),
-            'trapCard' => $this->fetchCard('TRAP', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148', 'en'),
+            'monsterCard' => fetchCard('MONSTER', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351', 'en'),
+            'spellCard' => fetchCard('SPELL', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134', 'en'),
+            'trapCard' => fetchCard('TRAP', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148', 'en'),
         ];
 
         $expected = [
@@ -143,127 +141,5 @@ class YuGiOhCrawlerTest extends Command
         }
 
         $this->info('');
-    }
-
-    private function fetchCard($attribute, $cardUrl, $lang)
-    {
-        $availableAttributes = [
-            'de' => [
-                'monster' => 'MONSTER',
-                'spell' => 'ZAUBER',
-                'trap' => 'FALLE',
-            ],
-            'en' => [
-                'monster' => 'MONSTER',
-                'spell' => 'SPELL',
-                'trap' => 'TRAP',
-            ],
-        ];
-
-        $attributes = $availableAttributes[$lang];
-
-        if ($attribute == $attributes['spell']) {
-            return $this->fetchSpell($cardUrl, $lang);
-        } else if ($attribute == $attributes['trap']) {
-            return $this->fetchTrap($cardUrl, $lang);
-        } else {
-            return $this->fetchMonster($cardUrl, $lang);
-        }
-    }
-
-    private function fetchMonster($cardUrl, $lang)
-    {
-        $html = getExternalContent($cardUrl, $lang);
-
-        $crawler = new Crawler($html);
-        $converter = new CssSelectorConverter();
-
-        $tabularDetails = $crawler->filterXPath($converter->toXPath('table#details div.item_box > span.item_box_value'))->each(function (Crawler $node) {
-            return trim($node->text());
-        });
-        $boxDetails = $crawler->filterXPath($converter->toXPath('table#details div.item_box_text, table#details div.item_box.t_center'))->each($this->childrenRemover());
-
-        $cardClass = 'monster';
-        $title = $crawler->filterXPath($converter->toXPath('nav#pan_nav > ul > li:nth-child(3)'))->text();
-        $attribute = $tabularDetails[0];
-        $level = intval($tabularDetails[1]);
-        $monsterType = $boxDetails[0];
-        $cardType = $boxDetails[1];
-        $atk = $tabularDetails[2];
-        $def = $tabularDetails[3];
-        $cardText = $boxDetails[2];
-
-        return compact('cardClass', 'title', 'attribute', 'level', 'monsterType', 'cardType', 'atk', 'def', 'cardText');
-    }
-
-    private function fetchSpell($cardUrl, $lang)
-    {
-        return array_merge(['cardClass' => 'spell'], $this->fetchSpellOrTrap($cardUrl, $lang));
-    }
-
-    private function fetchTrap($cardUrl, $lang)
-    {
-        return array_merge(['cardClass' => 'trap'], $this->fetchSpellOrTrap($cardUrl, $lang));
-    }
-
-    private function fetchSpellOrTrap($cardUrl, $lang)
-    {
-        $html = getExternalContent($cardUrl, $lang);
-
-        $crawler = new Crawler($html);
-        $converter = new CssSelectorConverter();
-
-        $tabularDetails = $crawler->filterXPath($converter->toXPath('table#details div.item_box'))->each($this->childrenRemover());
-        $boxDetails = $crawler->filterXPath($converter->toXPath('table#details div.item_box_text'))->each($this->childrenRemover());
-
-        $title = $crawler->filterXPath($converter->toXPath('nav#pan_nav > ul > li:nth-child(3)'))->text();
-        $icon = $tabularDetails[0];
-        $cardText = $boxDetails[0];
-
-        return compact('title', 'icon', 'cardText');
-    }
-
-    private function fetchSetCards($baseUrl, $setUrl, $lang)
-    {
-        $html = getExternalContent($setUrl, $lang);
-
-        $crawler = new Crawler($html);
-        $converter = new CssSelectorConverter();
-
-        $setCards = $crawler->filterXPath($converter->toXPath('ul.box_list > li'))->each(function (Crawler $node) use ($baseUrl, $converter) {
-            $url = $baseUrl . $node->filterXPath($converter->toXPath('input.link_value[type=hidden]'))->attr('value');
-            $attribute = trim($node->filterXPath($converter->toXPath('dd.box_card_spec > span.box_card_attribute'))->text());
-
-            return compact('url', 'attribute');
-        });
-
-        return $setCards;
-    }
-
-    private function fetchAllSetLinks($baseUrl, $lang)
-    {
-        $html = getExternalContent($baseUrl . '/yugiohdb/card_list.action',$lang);
-
-        $crawler = new Crawler($html);
-        $converter = new CssSelectorConverter();
-
-        $setLinks = $crawler->filterXPath($converter->toXPath('div#card_list_1 input.link_value[type=hidden]'))->each(function (Crawler $node) use ($baseUrl) {
-            return $baseUrl . $node->attr('value');
-        });
-
-        return $setLinks;
-    }
-
-    private function childrenRemover()
-    {
-        return function (Crawler $node) {
-            $domElement = $node->getNode(0);
-
-            foreach ($node->children() as $child) {
-                $domElement->removeChild($child);
-            }
-
-            return trim($node->text());
-        };
     }
 }

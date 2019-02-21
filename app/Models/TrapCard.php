@@ -4,6 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\TrapCard
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Set[] $sets
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard query()
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $title_german
+ * @property string $title_english
+ * @property string $icon
+ * @property string $card_text_german
+ * @property string $card_text_english
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereCardTextEnglish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereCardTextGerman($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereTitleEnglish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereTitleGerman($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereUpdatedAt($value)
+ * @property string $url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereUrl($value)
+ */
 class TrapCard extends Model
 {
     /**
@@ -17,6 +44,7 @@ class TrapCard extends Model
         'icon',
         'card_text_german',
         'card_text_english',
+        'url',
     ];
 
     public function sets()
