@@ -15,13 +15,16 @@ class CreateMonsterCardsTable extends Migration
     {
         Schema::create('monster_cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title_german');
+            $table->string('title_english');
             $table->string('attribute');
             $table->unsignedInteger('level');
             $table->string('monster_type');
             $table->string('card_type');
             $table->string('atk');
             $table->string('def');
+            $table->longText('card_text_german');
+            $table->longText('card_text_english');
             $table->timestamps();
         });
     }

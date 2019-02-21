@@ -15,9 +15,11 @@ class CreateTrapCardsTable extends Migration
     {
         Schema::create('trap_cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title_german');
+            $table->string('title_english');
             $table->string('icon');
-            $table->longText('card_text');
+            $table->longText('card_text_german');
+            $table->longText('card_text_english');
             $table->timestamps();
         });
     }

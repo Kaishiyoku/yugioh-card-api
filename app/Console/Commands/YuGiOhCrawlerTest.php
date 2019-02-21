@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 use Symfony\Component\DomCrawler\Crawler;
 
-class TestYuGiOhCrawler extends Command
+class YuGiOhCrawlerTest extends Command
 {
     /**
      * The name and signature of the console command.
