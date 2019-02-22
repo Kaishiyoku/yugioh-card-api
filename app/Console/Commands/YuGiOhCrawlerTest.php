@@ -7,6 +7,7 @@ use App\Models\MonsterCard;
 use App\Models\PendulumMonsterCard;
 use App\Models\SpellCard;
 use App\Models\TrapCard;
+use App\Models\XyzMonsterCard;
 use Diff\Differ\MapDiffer;
 use Illuminate\Console\Command;
 
@@ -33,12 +34,13 @@ class YuGiOhCrawlerTest extends Command
      */
     public function handle()
     {
-//        $this->testNormalMonsterCard();
+        $this->testNormalMonsterCard();
+        $this->testEffectMonsterCard();
+        $this->testPendulumMonsterCard();
+        $this->testXyzMonsterCard();
         $this->testLinkMonsterCard();
-//        $this->testEffectMonsterCard();
-//        $this->testPendulumMonsterCard();
-//        $this->testSpellCard();
-//        $this->testTrapCard();
+        $this->testSpellCard();
+        $this->testTrapCard();
 
         $this->info('');
     }
@@ -127,6 +129,34 @@ class YuGiOhCrawlerTest extends Command
             $this->error(var_dump($pendulumMonsterCardDiff));
         } else {
             $this->info('-> Pendulum monster card crawling succeeded.');
+        }
+    }
+
+    private function testXyzMonsterCard()
+    {
+        $expectedMonsterCard = new XyzMonsterCard();
+        $expectedMonsterCard->title_german = 'Abyss-Bewohner';
+        $expectedMonsterCard->title_english = 'Abyss Dweller';
+        $expectedMonsterCard->attribute = 'WATER';
+        $expectedMonsterCard->rank = 4;
+        $expectedMonsterCard->monster_type = 'Sea Serpent';
+        $expectedMonsterCard->card_type = 'Xyz/Effect';
+        $expectedMonsterCard->atk = '1700';
+        $expectedMonsterCard->def = '1400';
+        $expectedMonsterCard->card_text_german = '2 Monster der Stufe 4Solange an diese Karte ein Xyz-Material angehängt ist, das ursprünglich WASSER war, erhalten alle WASSER Monster, die du kontrollierst, 500 ATK. Einmal pro Spielzug, während des Spielzugs eines beliebigen Spielers: Du kannst 1 Xyz-Material von dieser Karte abhängen; Karteneffekte, die im Friedhof deines Gegners aktiviert werden, können in diesem Spielzug nicht aktiviert werden.';
+        $expectedMonsterCard->card_text_english = '2 Level 4 monstersWhile this card has an Xyz Material attached that was originally WATER, all WATER monsters you control gain 500 ATK. Once per turn, during either player\'s turn: You can detach 1 Xyz Material from this card; any card effects that activate in your opponent\'s Graveyard cannot be activated this turn.';
+        $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354';
+
+        $actualMonsterCard = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354');
+
+        $differ = new MapDiffer();
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+
+        if (count($monsterCardDiff) > 0) {
+            $this->error('-> Xyz monster card crawling failed:');
+            $this->error(var_dump($monsterCardDiff));
+        } else {
+            $this->info('-> Xyz monster card crawling succeeded.');
         }
     }
 

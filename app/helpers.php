@@ -185,6 +185,10 @@ if (!function_exists('fetchCard')) {
                 return fetchLinkMonster($cardUrl);
             }
 
+            if (\Illuminate\Support\Str::contains($cardInfo, 'Xyz')) {
+                return fetchXyzMonster($cardUrl);
+            }
+
             return fetchMonster($cardUrl);
         }
     }
@@ -201,6 +205,22 @@ if (!function_exists('fetchLinkMonster')) {
 
         $linkMonsterCard = new \App\Models\LinkMonsterCard($monsterCard->toArray());
         $linkMonsterCard->link = $monsterCard->level;
+
+        return $linkMonsterCard;
+    }
+}
+
+if (!function_exists('fetchXyzMonster')) {
+    /**
+     * @param string $cardUrl
+     * @return \App\Models\LinkMonsterCard
+     */
+    function fetchXyzMonster($cardUrl)
+    {
+        $monsterCard = fetchMonster($cardUrl);
+
+        $linkMonsterCard = new \App\Models\LinkMonsterCard($monsterCard->toArray());
+        $linkMonsterCard->rank = $monsterCard->level;
 
         return $linkMonsterCard;
     }
