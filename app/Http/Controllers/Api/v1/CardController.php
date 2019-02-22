@@ -7,6 +7,7 @@ use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
 use App\Models\PendulumMonsterCard;
 use App\Models\SpellCard;
+use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 
 class CardController extends Controller
@@ -16,10 +17,11 @@ class CardController extends Controller
         $monsterCards = $this->orderByTitle(MonsterCard::class)->get();
         $pendulumMonsterCards = $this->orderByTitle(PendulumMonsterCard::class)->get();
         $linkMonsterCards = $this->orderByTitle(LinkMonsterCard::class)->get();
+        $synchroMonsterCards = $this->orderByTitle(SynchroMonsterCard::class)->get();
         $spellCards = $this->orderByTitle(SpellCard::class)->get();
         $trapCards = $this->orderByTitle(TrapCard::class)->get();
 
-        return response()->json(compact('monsterCards', 'pendulumMonsterCards', 'linkMonsterCards', 'spellCards', 'trapCards'));
+        return response()->json(compact('monsterCards', 'pendulumMonsterCards', 'linkMonsterCards', 'synchroMonsterCards', 'spellCards', 'trapCards'));
     }
 
     private function orderByTitle($model)

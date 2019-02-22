@@ -189,6 +189,10 @@ if (!function_exists('fetchCard')) {
                 return fetchXyzMonster($cardUrl);
             }
 
+            if (\Illuminate\Support\Str::contains($cardInfo, 'Synchro')) {
+                return fetchSynchroMonster($cardUrl);
+            }
+
             return fetchMonster($cardUrl);
         }
     }
@@ -213,16 +217,29 @@ if (!function_exists('fetchLinkMonster')) {
 if (!function_exists('fetchXyzMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\LinkMonsterCard
+     * @return \App\Models\XyzMonsterCard
      */
     function fetchXyzMonster($cardUrl)
     {
         $monsterCard = fetchMonster($cardUrl);
 
-        $linkMonsterCard = new \App\Models\LinkMonsterCard($monsterCard->toArray());
-        $linkMonsterCard->rank = $monsterCard->level;
+        $xyzMonsterCard = new \App\Models\XyzMonsterCard($monsterCard->toArray());
+        $xyzMonsterCard->rank = $monsterCard->level;
 
-        return $linkMonsterCard;
+        return $xyzMonsterCard;
+    }
+}
+
+if (!function_exists('fetchSynchroMonster')) {
+    /**
+     * @param string $cardUrl
+     * @return \App\Models\SynchroMonsterCard
+     */
+    function fetchSynchroMonster($cardUrl)
+    {
+        $monsterCard = fetchMonster($cardUrl);
+
+        return new \App\Models\SynchroMonsterCard($monsterCard->toArray());
     }
 }
 

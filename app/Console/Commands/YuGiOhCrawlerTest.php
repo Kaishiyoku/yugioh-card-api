@@ -6,6 +6,7 @@ use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
 use App\Models\PendulumMonsterCard;
 use App\Models\SpellCard;
+use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
 use Diff\Differ\MapDiffer;
@@ -39,6 +40,7 @@ class YuGiOhCrawlerTest extends Command
         $this->testPendulumMonsterCard();
         $this->testXyzMonsterCard();
         $this->testLinkMonsterCard();
+        $this->testSynchroMonsterCard();
         $this->testSpellCard();
         $this->testTrapCard();
 
@@ -157,6 +159,34 @@ class YuGiOhCrawlerTest extends Command
             $this->error(var_dump($monsterCardDiff));
         } else {
             $this->info('-> Xyz monster card crawling succeeded.');
+        }
+    }
+
+    private function testSynchroMonsterCard()
+    {
+        $expectedMonsterCard = new SynchroMonsterCard();
+        $expectedMonsterCard->title_german = 'Schnellsynchron';
+        $expectedMonsterCard->title_english = 'Accel Synchron';
+        $expectedMonsterCard->attribute = 'DARK';
+        $expectedMonsterCard->level = 5;
+        $expectedMonsterCard->monster_type = 'Machine';
+        $expectedMonsterCard->card_type = 'Synchro/Tuner/Effect';
+        $expectedMonsterCard->atk = '500';
+        $expectedMonsterCard->def = '2100';
+        $expectedMonsterCard->card_text_german = '1 Empfänger- + 1 oder mehr Nicht-Empfänger-MonsterEinmal pro Spielzug: Du kannst 1 „Synchron“-Monster von deinem Deck auf den Friedhof legen und dann 1 dieser Effekte aktivieren;●Erhöhe die Stufe dieser Karte um die Stufe des auf den Friedhof gelegten Monsters.●Verringere die Stufe dieser Karte um die Stufe des auf den Friedhof gelegten Monsters.Während der Main Phase deines Gegners kannst du: Sofort nachdem dieser Effekt aufgelöst wurde, beschwöre 1 Synchromonster als Synchrobeschwörung und verwende dabei Material, das du kontrollierst, einschließlich dieser Karte. (Dies ist ein Schnelleffekt.) Du kannst nur einmal pro Spielzug ein oder mehr „Schnellsynchron“ als Synchrobeschwörung beschwören.';
+        $expectedMonsterCard->card_text_english = '1 Tuner + 1 or more non-Tuner monstersOnce per turn: You can send 1 "Synchron" monster from your Deck to the Graveyard, then activate 1 of these effects;●Increase this card\'s Level by the Level of the sent monster.●Reduce this card\'s Level by the Level of the sent monster.During your opponent\'s Main Phase, you can: Immediately after this effect resolves, Synchro Summon 1 Synchro Monster, using Materials including this card you control (this is a Quick Effect). You can only Synchro Summon "Accel Synchron(s)" once per turn.';
+        $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629';
+
+        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629');
+
+        $differ = new MapDiffer();
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+
+        if (count($monsterCardDiff) > 0) {
+            $this->error('-> Synchro monster card crawling failed:');
+            $this->error(var_dump($monsterCardDiff));
+        } else {
+            $this->info('-> Synchro monster card crawling succeeded.');
         }
     }
 
