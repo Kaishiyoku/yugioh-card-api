@@ -36,15 +36,15 @@ class YuGiOhCrawlerTest extends Command
      */
     public function handle()
     {
-//        $this->testNormalMonsterCard();
-//        $this->testEffectMonsterCard();
-//        $this->testPendulumMonsterCard();
-//        $this->testXyzMonsterCard();
-//        $this->testLinkMonsterCard();
-//        $this->testSynchroMonsterCard();
+        $this->testNormalMonsterCard();
+        $this->testEffectMonsterCard();
+        $this->testPendulumMonsterCard();
+        $this->testXyzMonsterCard();
+        $this->testLinkMonsterCard();
+        $this->testSynchroMonsterCard();
         $this->testRitualMonsterCard();
-//        $this->testSpellCard();
-//        $this->testTrapCard();
+        $this->testSpellCard();
+        $this->testTrapCard();
 
         $this->info('');
     }
@@ -69,7 +69,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($monsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Normal monster card crawling failed:');
             $this->error(var_dump($monsterCardDiff));
         } else {
@@ -97,7 +97,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($monsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Effect monster card crawling failed:');
             $this->error(var_dump($monsterCardDiff));
         } else {
@@ -126,11 +126,11 @@ class YuGiOhCrawlerTest extends Command
         $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906');
 
         $differ = new MapDiffer();
-        $pendulumMonsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($pendulumMonsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Pendulum monster card crawling failed:');
-            $this->error(var_dump($pendulumMonsterCardDiff));
+            $this->error(var_dump($monsterCardDiff));
         } else {
             $this->info('-> Pendulum monster card crawling succeeded.');
         }
@@ -156,7 +156,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($monsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Xyz monster card crawling failed:');
             $this->error(var_dump($monsterCardDiff));
         } else {
@@ -184,7 +184,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($monsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Synchro monster card crawling failed:');
             $this->error(var_dump($monsterCardDiff));
         } else {
@@ -212,7 +212,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($monsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Ritual monster card crawling failed:');
             $this->error(var_dump($monsterCardDiff));
         } else {
@@ -240,7 +240,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
 
-        if (count($monsterCardDiff) > 0) {
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
             $this->error('-> Link monster card crawling failed:');
             $this->error(var_dump($monsterCardDiff));
         } else {
@@ -263,7 +263,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
 
-        if (count($spellCardDiff) > 0) {
+        if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
             $this->error('-> Spell card crawling failed:');
             $this->error(var_dump($spellCardDiff));
         } else {
@@ -286,7 +286,7 @@ class YuGiOhCrawlerTest extends Command
         $differ = new MapDiffer();
         $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
 
-        if (count($trapCardDiff) > 0) {
+        if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
             $this->error('-> Trap card crawling failed:');
             $this->error(var_dump($trapCardDiff));
         } else {

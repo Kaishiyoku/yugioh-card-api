@@ -481,3 +481,10 @@ if (!function_exists('removeWhiteSpaces')) {
         return str_replace(["\t", "\r", "\n"], '', $str);
     }
 }
+
+if (!function_exists('isSameClass')) {
+    function isSameClass($objA, $objB)
+    {
+        return get_class($objA) === get_class($objB);
+    }
+}
