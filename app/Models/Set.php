@@ -39,6 +39,11 @@ class Set extends Model
         return $this->morphedByMany(MonsterCard::class, 'setable');
     }
 
+    public function pendulumMonsterCards()
+    {
+        return $this->morphedByMany(PendulumMonsterCard::class, 'setable');
+    }
+
     public function spellCards()
     {
         return $this->morphedByMany(SpellCard::class, 'setable');

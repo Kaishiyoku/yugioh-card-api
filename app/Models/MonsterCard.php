@@ -40,6 +40,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereUpdatedAt($value)
  * @property string $url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereUrl($value)
+ * @property string|null $additional_text_german
+ * @property string|null $additional_text_english
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereAdditionalTextEnglish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereAdditionalTextGerman($value)
+ * @property string|null $additional_value
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereAdditionalValue($value)
  */
 class MonsterCard extends Model
 {
@@ -60,6 +66,9 @@ class MonsterCard extends Model
         'card_text_german',
         'card_text_english',
         'url',
+        'additional_text_german',
+        'additional_text_english',
+        'additional_value',
     ];
 
     public function sets()

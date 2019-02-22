@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\MonsterCard;
+use App\Models\PendulumMonsterCard;
 use App\Models\SpellCard;
 use App\Models\TrapCard;
 
@@ -12,10 +13,11 @@ class CardController extends Controller
     public function index()
     {
         $monsterCards = $this->orderByTitle(MonsterCard::class)->get();
+        $pendulumMonsterCards = $this->orderByTitle(PendulumMonsterCard::class)->get();
         $spellCards = $this->orderByTitle(SpellCard::class)->get();
         $trapCards = $this->orderByTitle(TrapCard::class)->get();
 
-        return response()->json(compact('monsterCards', 'spellCards', 'trapCards'));
+        return response()->json(compact('monsterCards', 'pendulumMonsterCards', 'spellCards', 'trapCards'));
     }
 
     private function orderByTitle($model)

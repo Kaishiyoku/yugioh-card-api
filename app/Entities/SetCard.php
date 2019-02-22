@@ -15,13 +15,20 @@ class SetCard
     private $attribute;
 
     /**
+     * @var string
+     */
+    private $cardInfo;
+
+    /**
      * @param string $url
      * @param string $attribute
+     * @param string $cardInfo
      */
-    public function __construct($url, $attribute)
+    public function __construct($url, $attribute, $cardInfo = null)
     {
         $this->url = $url;
         $this->attribute = $attribute;
+        $this->cardInfo = $cardInfo;
     }
 
     /**
@@ -38,5 +45,13 @@ class SetCard
     public function getAttribute()
     {
         return $this->attribute;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCardInfo()
+    {
+        return $this->cardInfo;
     }
 }

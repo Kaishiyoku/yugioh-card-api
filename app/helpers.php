@@ -13,8 +13,6 @@ if (!function_exists('filterInt')) {
             return null;
         }
 
-        dd($matches[0]);
-
         return $matches[0];
     }
 }
@@ -131,10 +129,13 @@ if (!function_exists('fetchSetCards')) {
         $setCards = collect($crawler
             ->filterXPath($converter->toXPath('ul.box_list > li'))
             ->each(function (\Symfony\Component\DomCrawler\Crawler $node) use ($baseUrl, $converter) {
+                $cardInfoNode = $node->filterXPath($converter->toXPath('dd.box_card_spec > span.card_info_species_and_other_item'));
+
                 $url = $baseUrl . $node->filterXPath($converter->toXPath('input.link_value[type=hidden]'))->attr('value');
                 $attribute = trim($node->filterXPath($converter->toXPath('dd.box_card_spec > span.box_card_attribute'))->text());
+                $cardInfo = $cardInfoNode->count() == 1 ? removeWhiteSpaces($cardInfoNode->text()) : null;
 
-                return new \App\Entities\SetCard($url, $attribute);
+                return new \App\Entities\SetCard($url, $attribute, $cardInfo);
             })
         );
 
@@ -148,9 +149,9 @@ if (!function_exists('fetchCard')) {
      * @param $cardUrl
      * @param null $logger
      * @param $lang
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    function fetchCard($attribute, $cardUrl, $logger = null, $lang = 'en')
+    function fetchCard($attribute, $cardInfo, $cardUrl, $logger = null, $lang = 'en')
     {
         if ($logger) {
             $logger->info('  crawling card: ' .$cardUrl);
@@ -176,9 +177,50 @@ if (!function_exists('fetchCard')) {
         } else if ($attribute == $attributes['trap']) {
             return fetchTrap($cardUrl);
         } else {
+            if (\Illuminate\Support\Str::contains($cardInfo, 'Pendulum')) {
+                return fetchPendulumMonster($cardUrl);
+            }
+
             return fetchMonster($cardUrl);
         }
     }
+}
+
+function fetchPendulumMonster($cardUrl)
+{
+    $germanCardFields = fetchGermanCardFields($cardUrl);
+    $englishCardFields = fetchEnglishCardFields($cardUrl);
+    $html = getExternalContent($cardUrl);
+
+    $crawler = new \Symfony\Component\DomCrawler\Crawler($html);
+    $converter = new \Symfony\Component\CssSelector\CssSelectorConverter();
+
+    $tabularDetails = $crawler
+        ->filterXPath($converter->toXPath('table#details div.item_box > span.item_box_value'))
+        ->each(function (\Symfony\Component\DomCrawler\Crawler $node) {
+            return trim($node->text());
+        });
+    $boxDetails = $crawler
+        ->filterXPath($converter->toXPath('table#details div.item_box.t_center'))
+        ->each(childrenRemover());
+
+    $pendulumMonsterCard = new \App\Models\PendulumMonsterCard();
+    $pendulumMonsterCard->title_german = $germanCardFields->getTitle();
+    $pendulumMonsterCard->title_english = $englishCardFields->getTitle();
+    $pendulumMonsterCard->attribute = $tabularDetails[0];
+    $pendulumMonsterCard->level = intval($tabularDetails[1]);
+    $pendulumMonsterCard->pendulum_scale = intval($boxDetails[0]);
+    $pendulumMonsterCard->pendulum_effect_german = $germanCardFields->getAdditionalText();
+    $pendulumMonsterCard->pendulum_effect_english = $englishCardFields->getAdditionalText();
+    $pendulumMonsterCard->monster_type = $boxDetails[1];
+    $pendulumMonsterCard->card_type = removeWhiteSpaces($boxDetails[2]);
+    $pendulumMonsterCard->atk = $tabularDetails[2];
+    $pendulumMonsterCard->def = $tabularDetails[3];
+    $pendulumMonsterCard->card_text_german = $germanCardFields->getCardText();
+    $pendulumMonsterCard->card_text_english = $englishCardFields->getCardText();
+    $pendulumMonsterCard->url = $cardUrl;
+
+    return $pendulumMonsterCard;
 }
 
 if (!function_exists('fetchMonster')) {
@@ -201,7 +243,7 @@ if (!function_exists('fetchMonster')) {
                 return trim($node->text());
             });
         $boxDetails = $crawler
-            ->filterXPath($converter->toXPath('table#details div.item_box_text, table#details div.item_box.t_center'))
+            ->filterXPath($converter->toXPath('table#details div.item_box.t_center'))
             ->each(childrenRemover());
 
         $monsterCard = new \App\Models\MonsterCard();
@@ -210,7 +252,7 @@ if (!function_exists('fetchMonster')) {
         $monsterCard->attribute = $tabularDetails[0];
         $monsterCard->level = intval($tabularDetails[1]);
         $monsterCard->monster_type = $boxDetails[0];
-        $monsterCard->card_type = str_replace(["\t", "\r", "\n"], '', $boxDetails[1]);
+        $monsterCard->card_type = removeWhiteSpaces($boxDetails[1]);
         $monsterCard->atk = $tabularDetails[2];
         $monsterCard->def = $tabularDetails[3];
         $monsterCard->card_text_german = $germanCardFields->getCardText();
@@ -261,7 +303,7 @@ if (!function_exists('fetchSpell')) {
         $spellCard->title_english = $card->getTitleEnglish();
         $spellCard->icon = $card->getIcon();
         $spellCard->card_text_german = $card->getCardTextGerman();
-        $spellCard->card_text_english = $card->getTitleEnglish();
+        $spellCard->card_text_english = $card->getCardTextEnglish();
         $spellCard->url = $cardUrl;
 
         return $spellCard;
@@ -282,7 +324,7 @@ if (!function_exists('fetchTrap')) {
         $trapCard->title_english = $card->getTitleEnglish();
         $trapCard->icon = $card->getIcon();
         $trapCard->card_text_german = $card->getCardTextGerman();
-        $trapCard->card_text_english = $card->getTitleEnglish();
+        $trapCard->card_text_english = $card->getCardTextEnglish();
         $trapCard->url = $cardUrl;
 
         return $trapCard;
@@ -325,18 +367,20 @@ if (!function_exists('fetchLocaleSpecificCardFields')) {
         $converter = new \Symfony\Component\CssSelector\CssSelectorConverter();
 
         $boxDetails = $crawler
-            ->filterXPath($converter->toXPath('table#details div.item_box_text, table#details div.item_box.t_center'))
+            ->filterXPath($converter->toXPath('table#details div.item_box_text'))
             ->each(childrenRemover());
 
         $title = $crawler->filterXPath($converter->toXPath('nav#pan_nav > ul > li:nth-child(3)'))->text();
 
-        $cardText = count($boxDetails) >= 3 ? $boxDetails[2] : '';
+        $cardText = $boxDetails[0];
+        $additionalText = null;
 
-        if (count($boxDetails) == 1) {
-            $cardText = $boxDetails[0];
+        if (count($boxDetails) > 1) {
+            $additionalText = $boxDetails[0];
+            $cardText = $boxDetails[1];
         }
 
-        return new \App\Entities\LocaleSpecificCard($title, $cardText);
+        return new \App\Entities\LocaleSpecificCard($title, $cardText, $additionalText);
     }
 }
 
@@ -352,5 +396,12 @@ if (!function_exists('childrenRemover')) {
 
             return trim($node->text());
         };
+    }
+}
+
+if (!function_exists('removeWhiteSpaces')) {
+    function removeWhiteSpaces($str)
+    {
+        return str_replace(["\t", "\r", "\n"], '', $str);
     }
 }

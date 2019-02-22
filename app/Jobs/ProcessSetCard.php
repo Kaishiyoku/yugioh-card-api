@@ -35,7 +35,7 @@ class ProcessSetCard implements ShouldQueue
      */
     public function handle()
     {
-        $card = fetchCard($this->setCard->getAttribute(), $this->setCard->getUrl());
+        $card = fetchCard($this->setCard->getAttribute(), $this->setCard->getCardInfo(), $this->setCard->getUrl());
 
         $className = get_class($card);
         $foundCard = $className::whereTitleGerman($card->title_german)->whereTitleEnglish($card->title_english)->first();

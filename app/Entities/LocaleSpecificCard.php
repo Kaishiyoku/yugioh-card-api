@@ -15,13 +15,20 @@ class LocaleSpecificCard
     private $cardText;
 
     /**
+     * @var string
+     */
+    private $additionalText;
+
+    /**
      * @param string $title
      * @param string $cardText
+     * @param string $additionalText
      */
-    public function __construct($title, $cardText)
+    public function __construct($title, $cardText, $additionalText)
     {
         $this->title = $title;
         $this->cardText = $cardText;
+        $this->additionalText = $additionalText;
     }
 
     /**
@@ -38,5 +45,13 @@ class LocaleSpecificCard
     public function getCardText()
     {
         return $this->cardText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalText(): string
+    {
+        return $this->additionalText;
     }
 }
