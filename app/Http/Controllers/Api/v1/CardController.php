@@ -3,14 +3,6 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\LinkMonsterCard;
-use App\Models\MonsterCard;
-use App\Models\PendulumMonsterCard;
-use App\Models\RitualMonsterCard;
-use App\Models\SpellCard;
-use App\Models\SynchroMonsterCard;
-use App\Models\TrapCard;
-use App\Models\XyzMonsterCard;
 use Illuminate\Support\Facades\DB;
 
 class CardController extends Controller
@@ -22,8 +14,14 @@ class CardController extends Controller
         return response()->json($allMonsterCards);
     }
 
-    private function orderByTitle($model)
+    public function search($title)
     {
-        return $model::orderBy('title_english')->orderBy('title_german');
+        $allMonsterCards = DB::table('all_monster_cards')
+            ->where('title_german', 'LIKE', '%' . $title . '%')
+            ->orWhere('title_english', 'LIKE', '%' . $title . '%')
+            ->get()
+        ;
+
+        return response()->json($allMonsterCards);
     }
 }

@@ -16,6 +16,7 @@ Route::prefix('v1')->middleware('api')->group(function () {
     Route::get('/version', 'Api\v1\HomeController@version');
 
     Route::get('/cards', 'Api\v1\CardController@index');
+    Route::get('/cards/search/{ttile}', 'Api\v1\CardController@search');
 });
 
 Route::fallback(function () {
