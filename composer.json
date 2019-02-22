@@ -43,7 +43,29 @@
             "App\\": "app/"
         },
         "files":  [
-            "app/helpers.php"
+            "app/helpers/arrEach.php",
+            "app/helpers/arrMap.php",
+            "app/helpers/arrReduce.php",
+            "app/helpers/childrenRemove.php",
+            "app/helpers/fetchAllSetLinks.php",
+            "app/helpers/fetchCard.php",
+            "app/helpers/fetchEnglishCardFields.php",
+            "app/helpers/fetchGermanCardFields.php",
+            "app/helpers/fetchLinkMonster.php",
+            "app/helpers/fetchLocaleSpecificCardFields.php",
+            "app/helpers/fetchMonster.php",
+            "app/helpers/fetchPendulumMonster.php",
+            "app/helpers/fetchRitualMonster.php",
+            "app/helpers/fetchSetCards.php",
+            "app/helpers/fetchSpell.php",
+            "app/helpers/fetchSpellOrTrap.php",
+            "app/helpers/fetchSynchroMonster.php",
+            "app/helpers/fetchTrap.php",
+            "app/helpers/fetchXyzMonster.php",
+            "app/helpers/filterInt.php",
+            "app/helpers/getExternalContent.php",
+            "app/helpers/isSameClass.php",
+            "app/helpers/removeWhiteSpaces.php"
         ],
         "classmap": [
             "database/seeds",
