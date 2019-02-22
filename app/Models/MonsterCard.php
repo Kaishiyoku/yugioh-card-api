@@ -66,9 +66,6 @@ class MonsterCard extends Model
         'card_text_german',
         'card_text_english',
         'url',
-        'additional_text_german',
-        'additional_text_english',
-        'additional_value',
     ];
 
     public function sets()

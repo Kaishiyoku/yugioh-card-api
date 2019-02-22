@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereIdentifier($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LinkMonsterCard[] $linkMonsterCards
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PendulumMonsterCard[] $pendulumMonsterCards
  */
 class Set extends Model
 {
@@ -42,6 +44,11 @@ class Set extends Model
     public function pendulumMonsterCards()
     {
         return $this->morphedByMany(PendulumMonsterCard::class, 'setable');
+    }
+
+    public function linkMonsterCards()
+    {
+        return $this->morphedByMany(LinkMonsterCard::class, 'setable');
     }
 
     public function spellCards()
