@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Entities\SetLink;
-use function App\helpers\fetchAllSetLinks;
 use App\Jobs\ProcessSetLink;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
