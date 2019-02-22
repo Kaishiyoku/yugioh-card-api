@@ -193,6 +193,10 @@ if (!function_exists('fetchCard')) {
                 return fetchSynchroMonster($cardUrl);
             }
 
+            if (\Illuminate\Support\Str::contains($cardInfo, 'Ritual')) {
+                return fetchRitualMonster($cardUrl);
+            }
+
             return fetchMonster($cardUrl);
         }
     }
@@ -240,6 +244,19 @@ if (!function_exists('fetchSynchroMonster')) {
         $monsterCard = fetchMonster($cardUrl);
 
         return new \App\Models\SynchroMonsterCard($monsterCard->toArray());
+    }
+}
+
+if (!function_exists('fetchRitualMonster')) {
+    /**
+     * @param string $cardUrl
+     * @return \App\Models\RitualMonsterCard
+     */
+    function fetchRitualMonster($cardUrl)
+    {
+        $monsterCard = fetchMonster($cardUrl);
+
+        return new \App\Models\RitualMonsterCard($monsterCard->toArray());
     }
 }
 

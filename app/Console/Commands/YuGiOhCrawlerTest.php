@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
 use App\Models\PendulumMonsterCard;
+use App\Models\RitualMonsterCard;
 use App\Models\SpellCard;
 use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
@@ -35,14 +36,15 @@ class YuGiOhCrawlerTest extends Command
      */
     public function handle()
     {
-        $this->testNormalMonsterCard();
-        $this->testEffectMonsterCard();
-        $this->testPendulumMonsterCard();
-        $this->testXyzMonsterCard();
-        $this->testLinkMonsterCard();
-        $this->testSynchroMonsterCard();
-        $this->testSpellCard();
-        $this->testTrapCard();
+//        $this->testNormalMonsterCard();
+//        $this->testEffectMonsterCard();
+//        $this->testPendulumMonsterCard();
+//        $this->testXyzMonsterCard();
+//        $this->testLinkMonsterCard();
+//        $this->testSynchroMonsterCard();
+        $this->testRitualMonsterCard();
+//        $this->testSpellCard();
+//        $this->testTrapCard();
 
         $this->info('');
     }
@@ -187,6 +189,34 @@ class YuGiOhCrawlerTest extends Command
             $this->error(var_dump($monsterCardDiff));
         } else {
             $this->info('-> Synchro monster card crawling succeeded.');
+        }
+    }
+
+    private function testRitualMonsterCard()
+    {
+        $expectedMonsterCard = new RitualMonsterCard();
+        $expectedMonsterCard->title_german = 'Aufgegeben';
+        $expectedMonsterCard->title_english = 'Relinquished';
+        $expectedMonsterCard->attribute = 'DARK';
+        $expectedMonsterCard->level = 1;
+        $expectedMonsterCard->monster_type = 'Spellcaster';
+        $expectedMonsterCard->card_type = 'Ritual/Effect';
+        $expectedMonsterCard->atk = '0';
+        $expectedMonsterCard->def = '0';
+        $expectedMonsterCard->card_text_german = 'Du kannst diese Karte mit „Schwarze-Illusion-Ritual“ als Ritualbeschwörung beschwören. Einmal pro Spielzug: Du kannst 1 Monster wählen, das dein Gegner kontrolliert; rüste diese Karte mit dem gewählten Ziel aus (max. 1). Die ATK/DEF dieser Karte werden dieselben wie die des ausrüstenden Monsters. Falls diese Karte durch Kampf zerstört würde, zerstöre stattdessen das ausrüstende Monster. Solange diese Karte mit dem Monster ausgerüstet ist, fügt jeglicher Kampfschaden, den du aus Kämpfen erhältst, an denen diese Karte beteiligt ist, deinem Gegner genauso viel Effektschaden zu.';
+        $expectedMonsterCard->card_text_english = 'You can Ritual Summon this card with "Black Illusion Ritual". Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card\'s ATK/DEF become equal to that equipped monster\'s. If this card would be destroyed by battle, destroy that equipped monster instead. While equipped with that monster, any battle damage you take from battles involving this card inflicts equal effect damage to your opponent.';
+        $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737';
+
+        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737');
+
+        $differ = new MapDiffer();
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+
+        if (count($monsterCardDiff) > 0) {
+            $this->error('-> Ritual monster card crawling failed:');
+            $this->error(var_dump($monsterCardDiff));
+        } else {
+            $this->info('-> Ritual monster card crawling succeeded.');
         }
     }
 

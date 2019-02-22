@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PendulumMonsterCard[] $pendulumMonsterCards
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\XyzMonsterCard[] $xyzMonsterCards
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SynchroMonsterCard[] $synchroMonsterCards
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RitualMonsterCard[] $ritualMonsterCards
  */
 class Set extends Model
 {
@@ -61,6 +62,11 @@ class Set extends Model
     public function linkMonsterCards()
     {
         return $this->morphedByMany(LinkMonsterCard::class, 'setable');
+    }
+
+    public function ritualMonsterCards()
+    {
+        return $this->morphedByMany(RitualMonsterCard::class, 'setable');
     }
 
     public function spellCards()
