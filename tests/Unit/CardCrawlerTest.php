@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Tests\Unit;
 
-use App\Console\BaseCommand;
 use App\Entities\CardSet;
 use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
@@ -12,59 +11,14 @@ use App\Models\SpellCard;
 use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
-use Diff\Differ\MapDiffer;
+use Spatie\Snapshots\MatchesSnapshots;
+use Tests\TestCase;
 
-class YuGiOhCrawlerTest extends BaseCommand
+class CardCrawlerTest extends TestCase
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'yugioh:test';
+    use MatchesSnapshots;
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Test the Yu-Gi-Oh! crawler';
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        $this->testNormalMonsterCard();
-        $this->testEffectMonsterCard();
-        $this->testPendulumMonsterCard();
-        $this->testXyzMonsterCard();
-        $this->testLinkMonsterCard();
-        $this->testSynchroMonsterCard();
-        $this->testRitualMonsterCard();
-
-        $this->testSpellCard();
-        $this->testTrapCard();
-
-        $this->testForbiddenEffectMonsterCard();
-
-        $this->testForbiddenSpellCard();
-        $this->testForbiddenTrapCard();
-
-        $this->testLimitedEffectMonsterCard();
-        $this->testLimitedPendulumMonsterCard();
-
-        $this->testLimitedTrapCard();
-        $this->testLimitedSpellCard();
-
-//        $this->testSetCrawler();
-
-        $this->info('');
-    }
-
-    private function testNormalMonsterCard()
+    public function testNormalMonsterCard()
     {
         $expectedMonsterCard = new MonsterCard();
         $expectedMonsterCard->title_german = 'Blauäugiger w. Drache';
@@ -83,21 +37,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Normal monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Normal monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testEffectMonsterCard()
+    public function testEffectMonsterCard()
     {
         $expectedMonsterCard = new MonsterCard();
         $expectedMonsterCard->title_german = 'Gefahr! Ogopogo!';
@@ -116,21 +59,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Effect monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Effect monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testPendulumMonsterCard()
+    public function testPendulumMonsterCard()
     {
         $expectedMonsterCard = new PendulumMonsterCard();
         $expectedMonsterCard->title_german = 'Astrografzauberer';
@@ -152,21 +84,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Pendulum monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Pendulum monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testXyzMonsterCard()
+    public function testXyzMonsterCard()
     {
         $expectedMonsterCard = new XyzMonsterCard();
         $expectedMonsterCard->title_german = 'Abyss-Bewohner';
@@ -185,21 +106,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Xyz monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Xyz monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testSynchroMonsterCard()
+    public function testSynchroMonsterCard()
     {
         $expectedMonsterCard = new SynchroMonsterCard();
         $expectedMonsterCard->title_german = 'Schnellsynchron';
@@ -218,21 +128,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Synchro monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Synchro monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testRitualMonsterCard()
+    public function testRitualMonsterCard()
     {
         $expectedMonsterCard = new RitualMonsterCard();
         $expectedMonsterCard->title_german = 'Aufgegeben';
@@ -251,21 +150,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error('-> [fail] Ritual monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Ritual monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testLinkMonsterCard()
+    public function testLinkMonsterCard()
     {
         $expectedMonsterCard = new LinkMonsterCard();
         $expectedMonsterCard->title_german = 'Dekodier-Sprecher';
@@ -284,21 +172,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Cyberse/Link/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Link monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Link monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testSpellCard()
+    public function testSpellCard()
     {
         $expectedSpellCard = new SpellCard();
         $expectedSpellCard->title_german = 'Fusion des Feuers';
@@ -312,21 +189,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134')->getCard();
 
-        $differ = new MapDiffer();
-        $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
-
-        if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
-            $this->error(' [fail] Spell card crawler');
-
-            $this->verbose(function () use ($spellCardDiff) {
-                $this->error(var_dump($spellCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Spell card crawler');
-        }
+        $this->assertEquals($expectedSpellCard, $actualSpellCard);
     }
 
-    private function testTrapCard()
+    public function testTrapCard()
     {
         $expectedTrapCard = new TrapCard();
         $expectedTrapCard->title_german = 'NEXT';
@@ -340,21 +206,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148')->getCard();
 
-        $differ = new MapDiffer();
-        $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
-
-        if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
-            $this->error(' [fail] Trap card crawler');
-
-            $this->verbose(function () use ($trapCardDiff) {
-                $this->error(var_dump($trapCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Trap card crawler');
-        }
+        $this->assertEquals($expectedTrapCard, $actualTrapCard);
     }
 
-    private function testForbiddenEffectMonsterCard()
+    public function testForbiddenEffectMonsterCard()
     {
         $expectedMonsterCard = new MonsterCard();
         $expectedMonsterCard->title_german = 'Stufenfresser';
@@ -373,21 +228,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Insect/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Forbidden Effect monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Forbidden Effect monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testForbiddenSpellCard()
+    public function testForbiddenSpellCard()
     {
         $expectedSpellCard = new SpellCard();
         $expectedSpellCard->title_german = 'Starker Wachposten';
@@ -401,21 +245,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907')->getCard();
 
-        $differ = new MapDiffer();
-        $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
-
-        if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
-            $this->error(' [fail] Forbidden Spell card crawler');
-
-            $this->verbose(function () use ($spellCardDiff) {
-                $this->error(var_dump($spellCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Forbidden Spell card crawler');
-        }
+        $this->assertEquals($expectedSpellCard, $actualSpellCard);
     }
 
-    private function testForbiddenTrapCard()
+    public function testForbiddenTrapCard()
     {
         $expectedTrapCard = new TrapCard();
         $expectedTrapCard->title_german = 'Bedeutungslosigkeit der Eitelkeit (Geändert von: Leere der Eitelkeit)';
@@ -429,21 +262,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153')->getCard();
 
-        $differ = new MapDiffer();
-        $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
-
-        if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
-            $this->error(' [fail] Forbidden Trap card crawler');
-
-            $this->verbose(function () use ($trapCardDiff) {
-                $this->error(var_dump($trapCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Forbidden Trap card crawler');
-        }
+        $this->assertEquals($expectedTrapCard, $actualTrapCard);
     }
 
-    private function testLimitedEffectMonsterCard()
+    public function testLimitedEffectMonsterCard()
     {
         $expectedMonsterCard = new MonsterCard();
         $expectedMonsterCard->title_german = 'Cyber-Stein';
@@ -462,21 +284,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Machine/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Limited Effect monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Limited Effect monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testLimitedPendulumMonsterCard()
+    public function testLimitedPendulumMonsterCard()
     {
         $expectedMonsterCard = new PendulumMonsterCard();
         $expectedMonsterCard->title_german = 'Qliphort-Kundschafter';
@@ -498,21 +309,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualMonsterCard = fetchCard('MONSTER', '[Machine/Pendulum/Normal]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353')->getCard();
 
-        $differ = new MapDiffer();
-        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
-
-        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
-            $this->error(' [fail] Limited Pendulum monster card crawler');
-
-            $this->verbose(function () use ($monsterCardDiff) {
-                $this->error(var_dump($monsterCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Limited Pendulum monster card crawler');
-        }
+        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
     }
 
-    private function testLimitedSpellCard()
+    public function testLimitedSpellCard()
     {
         $expectedSpellCard = new SpellCard();
         $expectedSpellCard->title_german = 'Notfallteleport';
@@ -526,21 +326,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747')->getCard();
 
-        $differ = new MapDiffer();
-        $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
-
-        if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
-            $this->error(' [fail] Limited Spell card crawler');
-
-            $this->verbose(function () use ($spellCardDiff) {
-                $this->error(var_dump($spellCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Limited Spell card crawler');
-        }
+        $this->assertEquals($expectedSpellCard, $actualSpellCard);
     }
 
-    private function testLimitedTrapCard()
+    public function testLimitedTrapCard()
     {
         $expectedTrapCard = new TrapCard();
         $expectedTrapCard->title_german = 'Kaiserlicher Befehl';
@@ -554,21 +343,10 @@ class YuGiOhCrawlerTest extends BaseCommand
 
         $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960')->getCard();
 
-        $differ = new MapDiffer();
-        $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
-
-        if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
-            $this->error(' [fail] Limited Trap card crawler');
-
-            $this->verbose(function () use ($trapCardDiff) {
-                $this->error(var_dump($trapCardDiff));
-            });
-        } else {
-            $this->info(' [ok]   Limited Trap card crawler');
-        }
+        $this->assertEquals($expectedTrapCard, $actualTrapCard);
     }
 
-//    private function testSetCrawler()
+//    public function testSetCrawler()
 //    {
 //        $toArrayMapper = function (CardSet $cardSet) {
 //            return $cardSet->toArray();
@@ -596,17 +374,6 @@ class YuGiOhCrawlerTest extends BaseCommand
 //        ])->map($toArrayMapper);
 //        $actualSets = fetchCardSets('https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737')->map($toArrayMapper);
 //
-//        $differ = new MapDiffer(true);
-//        $diff = $differ->doDiff($expectedSets->toArray(), $actualSets->toArray());
-//
-//        if (count($diff) > 0) {
-//            $this->error(' [fail] Card Sets crawler');
-//
-//            $this->verbose(function () use ($diff) {
-//                $this->error(var_dump($diff));
-//            });
-//        } else {
-//            $this->info(' [ok]   Card Sets crawler');
-//        }
+//        $this->assertEquals($expectedSets, $actualSets);
 //    }
 }
