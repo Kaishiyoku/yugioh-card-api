@@ -20,7 +20,11 @@ if (!function_exists('fetchLocalizedCardSets')) {
             $cardIdentifier = $identifiers[1];
             $title = $values[2];
 
-            return new \App\Entities\CardSet($setIdentifier, $cardIdentifier, $title);
+            $rarityNode = $subNode->filterXPath($converter->toXPath('td > img.icon_info'))->first();
+
+            $rarity = $rarityNode->count() > 0 ? $rarityNode->attr('alt') : 'Common';
+
+            return new \App\Entities\CardSet($setIdentifier, $cardIdentifier, $title, $rarity);
         }));
     }
 }

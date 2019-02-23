@@ -11,12 +11,20 @@ use App\Models\SpellCard;
 use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
+use Illuminate\Support\Collection;
 use Spatie\Snapshots\MatchesSnapshots;
 use Tests\TestCase;
 
 class CardCrawlerTest extends TestCase
 {
     use MatchesSnapshots;
+
+    private function toArrayMapper(Collection $collection)
+    {
+        return $collection->map(function ($item) {
+            return $item->toArray();
+        })->toArray();
+    }
 
     public function testNormalMonsterCard()
     {
@@ -35,9 +43,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007')->getCard();
+        $cardCarrier = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testEffectMonsterCard()
@@ -57,9 +66,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351')->getCard();
+        $cardCarrier = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testPendulumMonsterCard()
@@ -82,9 +92,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = true;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testXyzMonsterCard()
@@ -104,9 +115,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testSynchroMonsterCard()
@@ -126,9 +138,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testRitualMonsterCard()
@@ -148,9 +161,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testLinkMonsterCard()
@@ -170,9 +184,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Cyberse/Link/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Cyberse/Link/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testSpellCard()
@@ -187,9 +202,10 @@ class CardCrawlerTest extends TestCase
         $expectedSpellCard->is_forbidden = false;
         $expectedSpellCard->is_limited = false;
 
-        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134')->getCard();
+        $cardCarrier = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134');
 
-        $this->assertEquals($expectedSpellCard, $actualSpellCard);
+        $this->assertEquals($expectedSpellCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testTrapCard()
@@ -204,9 +220,10 @@ class CardCrawlerTest extends TestCase
         $expectedTrapCard->is_forbidden = false;
         $expectedTrapCard->is_limited = false;
 
-        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148')->getCard();
+        $cardCarrier = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148');
 
-        $this->assertEquals($expectedTrapCard, $actualTrapCard);
+        $this->assertEquals($expectedTrapCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testForbiddenEffectMonsterCard()
@@ -226,9 +243,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = true;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Insect/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Insect/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testForbiddenSpellCard()
@@ -243,9 +261,10 @@ class CardCrawlerTest extends TestCase
         $expectedSpellCard->is_forbidden = true;
         $expectedSpellCard->is_limited = false;
 
-        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907')->getCard();
+        $cardCarrier = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907');
 
-        $this->assertEquals($expectedSpellCard, $actualSpellCard);
+        $this->assertEquals($expectedSpellCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testForbiddenTrapCard()
@@ -260,9 +279,10 @@ class CardCrawlerTest extends TestCase
         $expectedTrapCard->is_forbidden = true;
         $expectedTrapCard->is_limited = false;
 
-        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153')->getCard();
+        $cardCarrier = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153');
 
-        $this->assertEquals($expectedTrapCard, $actualTrapCard);
+        $this->assertEquals($expectedTrapCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testLimitedEffectMonsterCard()
@@ -282,9 +302,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = true;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Machine/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testLimitedPendulumMonsterCard()
@@ -307,9 +328,10 @@ class CardCrawlerTest extends TestCase
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = true;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Pendulum/Normal]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353')->getCard();
+        $cardCarrier = fetchCard('MONSTER', '[Machine/Pendulum/Normal]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353');
 
-        $this->assertEquals($expectedMonsterCard, $actualMonsterCard);
+        $this->assertEquals($expectedMonsterCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testLimitedSpellCard()
@@ -324,9 +346,10 @@ class CardCrawlerTest extends TestCase
         $expectedSpellCard->is_forbidden = false;
         $expectedSpellCard->is_limited = true;
 
-        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747')->getCard();
+        $cardCarrier = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747');
 
-        $this->assertEquals($expectedSpellCard, $actualSpellCard);
+        $this->assertEquals($expectedSpellCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
 
     public function testLimitedTrapCard()
@@ -341,39 +364,9 @@ class CardCrawlerTest extends TestCase
         $expectedTrapCard->is_forbidden = false;
         $expectedTrapCard->is_limited = true;
 
-        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960')->getCard();
+        $cardCarrier = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960');
 
-        $this->assertEquals($expectedTrapCard, $actualTrapCard);
+        $this->assertEquals($expectedTrapCard, $cardCarrier->getCard());
+        $this->assertMatchesSnapshot($this->toArrayMapper($cardCarrier->getCardSets()));
     }
-
-//    public function testSetCrawler()
-//    {
-//        $toArrayMapper = function (CardSet $cardSet) {
-//            return $cardSet->toArray();
-//        };
-//
-//        $expectedSets = collect([
-//            new CardSet('SS01', 'ENC08', 'SPEED DUEL STARTER DECK: DESTINY MASTERS'),
-//            new CardSet('LED2', 'EN000', 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'),
-//            new CardSet('MIL1', 'EN008', 'MILLENNIUM PACK'),
-//            new CardSet('LCYW', 'EN113', 'LEGENDARY COLLECTION 3 YUGI\'S WORLD MEGA PACK'),
-//            new CardSet('DLG1', 'EN055', 'DARK LEGENDS'),
-//            new CardSet('RP01', 'EN054', 'RETRO PACK'),
-//            new CardSet('DB1', 'EN015', 'DARK BEGINNING 1'),
-//            new CardSet('SDP', '001', 'STARTER DECK PEGASUS'),
-//            new CardSet('MRL', '029', 'SPELL RULER'),
-//
-//            new CardSet('SS01', 'DEC08', 'SPEED DUEL STARTER DECK: DESTINY MASTERS'),
-//            new CardSet('LED2', 'DE000', 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'),
-//            new CardSet('MIL1', 'DE008', 'MILLENNIUM PACK'),
-//            new CardSet('LCYW', 'DE113', 'LEGENDARY COLLECTION 3 MEGA PACK'),
-//            new CardSet('RP01', 'DE054', 'RETRO PACK'),
-//            new CardSet('DB1', 'DE015', 'DARK BEGINNING 1'),
-//            new CardSet('SDP', 'G001', 'STARTER DECK PEGASUS'),
-//            new CardSet('SRL', 'G029', 'SPELL RULER'),
-//        ])->map($toArrayMapper);
-//        $actualSets = fetchCardSets('https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737')->map($toArrayMapper);
-//
-//        $this->assertEquals($expectedSets, $actualSets);
-//    }
 }

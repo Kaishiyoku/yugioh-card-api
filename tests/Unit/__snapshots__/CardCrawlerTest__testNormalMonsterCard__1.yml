@@ -1,0 +1,300 @@
+-
+    setIdentifier: SS02
+    cardIdentifier: DEA01
+    title: 'SPEED DUEL STARTER DECK: DUELISTS OF TOMORROW'
+    rarity: Common
+-
+    setIdentifier: LED3
+    cardIdentifier: DE006
+    title: 'LEGENDARY DUELISTS: WHITE DRAGON ABYSS'
+    rarity: Common
+-
+    setIdentifier: KACB
+    cardIdentifier: DE001
+    title: 'YUGI & KAIBA COLLECTOR BOX'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: LCKC
+    cardIdentifier: DE001
+    title: 'LEGENDARY COLLECTION: KAIBA MEGA PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: CT14
+    cardIdentifier: DE002
+    title: '2017 MEGA-TIN'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: DUSA
+    cardIdentifier: DE043
+    title: 'DUELIST SAGA'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: MVP1
+    cardIdentifier: DEG55
+    title: 'Yu-Gi-Oh! THE DARK SIDE OF DIMENSIONS MOVIE PACK GOLD EDITION'
+    rarity: 'Gold Rare'
+-
+    setIdentifier: MVP1
+    cardIdentifier: DEGV4
+    title: 'Yu-Gi-Oh! THE DARK SIDE OF DIMENSIONS MOVIE PACK GOLD EDITION'
+    rarity: 'Gold Secret'
+-
+    setIdentifier: SDKS
+    cardIdentifier: DE009
+    title: 'STRUCTURE DECK SETO KAIBA'
+    rarity: Common
+-
+    setIdentifier: LDK2
+    cardIdentifier: DEK01
+    title: 'LEGENDARY DECKS II'
+    rarity: Common
+-
+    setIdentifier: CT13
+    cardIdentifier: DE008
+    title: '2016 MEGA-TINS'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: MVP1
+    cardIdentifier: DE055
+    title: 'Yu-Gi-Oh! THE DARK SIDE OF DIMENSIONS MOVIE PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DPBC
+    cardIdentifier: DE016
+    title: 'DUELIST PACK BATTLE CITY'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: PGL2
+    cardIdentifier: DE080
+    title: 'PREMIUM GOLD 2'
+    rarity: 'Gold Rare'
+-
+    setIdentifier: SDBE
+    cardIdentifier: DE001
+    title: 'STRUCTURE DECK SAGA OF BLUE-EYES WHITE DRAGON'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: GLD5
+    cardIdentifier: DE001
+    title: 'GOLD SERIES HAUNTED MINE'
+    rarity: 'Ghost Rare'
+-
+    setIdentifier: SDDC
+    cardIdentifier: DE004
+    title: 'STRUCTURE DECK DRAGONS COLLIDE'
+    rarity: Common
+-
+    setIdentifier: DPKB
+    cardIdentifier: DE001
+    title: 'DUELIST PACK KAIBA'
+    rarity: 'Super Rare'
+-
+    setIdentifier: RP01
+    cardIdentifier: DE001
+    title: 'RETRO PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DB1
+    cardIdentifier: DE098
+    title: 'DARK BEGINNING 1'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: PCK
+    cardIdentifier: G001
+    title: 'Yu-Gi-Oh! POWER OF CHAOS KAIBA THE REVENGE Pakete'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: SKE
+    cardIdentifier: DE001
+    title: 'STARTER DECK KAIBA EVOLUTION'
+    rarity: 'Super Rare'
+-
+    setIdentifier: SDK
+    cardIdentifier: G001
+    title: 'STARTER DECK KAIBA'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: LOB
+    cardIdentifier: G001
+    title: 'LEGEND OF BLUE EYES WHITE DRAGON'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: BNZ
+    cardIdentifier: G001
+    title: 'BANZAI! Promokarten - NR.23 2002 -'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: SS02
+    cardIdentifier: ENA01
+    title: 'SPEED DUEL STARTER DECK: DUELISTS OF TOMORROW'
+    rarity: Common
+-
+    setIdentifier: LED3
+    cardIdentifier: EN006
+    title: 'LEGENDARY DUELISTS: WHITE DRAGON ABYSS'
+    rarity: Common
+-
+    setIdentifier: LCKC
+    cardIdentifier: EN001
+    title: 'LEGENDARY COLLECTION KAIBA MEGA PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: KACB
+    cardIdentifier: EN001
+    title: 'KAIBA''S COLLECTOR BOX'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: CT14
+    cardIdentifier: EN002
+    title: '2017 MEGA-TINS'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: DUSA
+    cardIdentifier: EN043
+    title: 'DUELIST SAGA'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: MVP1
+    cardIdentifier: ENG55
+    title: 'Yu-Gi-Oh! THE DARK SIDE OF DIMENSIONS MOVIE PACK GOLD EDITION'
+    rarity: 'Gold Rare'
+-
+    setIdentifier: MVP1
+    cardIdentifier: ENGV4
+    title: 'Yu-Gi-Oh! THE DARK SIDE OF DIMENSIONS MOVIE PACK GOLD EDITION'
+    rarity: 'Gold Secret'
+-
+    setIdentifier: SDKS
+    cardIdentifier: EN009
+    title: 'STRUCTURE DECK : SETO KAIBA'
+    rarity: Common
+-
+    setIdentifier: LDK2
+    cardIdentifier: ENK01
+    title: 'LEGENDARY DECKS II'
+    rarity: Common
+-
+    setIdentifier: CT13
+    cardIdentifier: EN008
+    title: '2016 MEGA-TINS'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: MVP1
+    cardIdentifier: EN055
+    title: 'Yu-Gi-Oh! THE DARK SIDE OF DIMENSIONS MOVIE PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: JMPS
+    cardIdentifier: EN002
+    title: 'SHONEN JUMP Scholastic Edition Promotional Card'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DPBC
+    cardIdentifier: EN016
+    title: 'DUELIST PACK - BATTLE CITY -'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: PGL2
+    cardIdentifier: EN080
+    title: 'PREMIUM GOLD: RETURN OF THE BLING'
+    rarity: 'Gold Rare'
+-
+    setIdentifier: JUMP
+    cardIdentifier: EN068
+    title: 'SHONEN JUMP membership Promotional Card - March 2014 -'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: YSKR
+    cardIdentifier: EN001
+    title: 'STARTER DECK KAIBA RELOADED'
+    rarity: Common
+-
+    setIdentifier: YSKR
+    cardIdentifier: EN001
+    title: 'STARTER DECK KAIBA RELOADED'
+    rarity: 'Ultimate Rare'
+-
+    setIdentifier: SDBE
+    cardIdentifier: EN001
+    title: 'SAGA OF BLUE-EYES WHITE DRAGON STRUCTURE DECK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: GLD5
+    cardIdentifier: EN001
+    title: 'GOLD SERIES HAUNTED MINE'
+    rarity: 'Ghost Rare'
+-
+    setIdentifier: SDDC
+    cardIdentifier: EN004
+    title: 'DRAGONS COLLIDE STRUCTURE DECK'
+    rarity: Common
+-
+    setIdentifier: DPKB
+    cardIdentifier: EN001
+    title: 'DUELIST PACK - KAIBA -'
+    rarity: 'Super Rare'
+-
+    setIdentifier: DT01
+    cardIdentifier: EN001
+    title: 'DUEL TERMINAL 1'
+    rarity: 'Super Rare'
+-
+    setIdentifier: DL09
+    cardIdentifier: EN001
+    title: 'DUELIST LEAGUE 2010'
+    rarity: Rare
+-
+    setIdentifier: DTP1
+    cardIdentifier: EN001
+    title: 'DUEL TERMINAL - PREVIEW WAVE 2'
+    rarity: 'Super Rare'
+-
+    setIdentifier: YAP1
+    cardIdentifier: EN001
+    title: 'ANNIVERSARY PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DLG1
+    cardIdentifier: EN002
+    title: 'DARK LEGENDS'
+    rarity: 'Super Rare'
+-
+    setIdentifier: DTP1
+    cardIdentifier: EN001
+    title: 'DUEL TERMINAL - PREVIEW WAVE 1'
+    rarity: Common
+-
+    setIdentifier: RP01
+    cardIdentifier: EN001
+    title: 'RETRO PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DB1
+    cardIdentifier: EN098
+    title: 'DARK BEGINNING 1'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: PCK
+    cardIdentifier: '001'
+    title: 'Yu-Gi-Oh! POWER OF CHAOS KAIBA THE REVENGE Bundles'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: SKE
+    cardIdentifier: '001'
+    title: 'STARTER DECK KAIBA Evolution'
+    rarity: 'Super Rare'
+-
+    setIdentifier: SDK
+    cardIdentifier: '001'
+    title: 'STARTER DECK KAIBA'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DDS
+    cardIdentifier: '001'
+    title: 'Yu-Gi-Oh! Dark Duel Stories Bundles'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: LOB
+    cardIdentifier: '001'
+    title: 'LEGEND OF BLUE EYES WHITE DRAGON'
+    rarity: 'Ultra Rare'

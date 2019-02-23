@@ -34,7 +34,7 @@ class LocaleSpecificCard
      */
     public function __construct($title, $cardText, $additionalText, $cardSets)
     {
-        if ($cardSets) {
+        if (empty($cardSets)) {
             $cardSets = collect();
         }
 

@@ -17,13 +17,25 @@ class CardSet
     /**
      * @var string
      */
+    private $rarity;
+
+    /**
+     * @var string
+     */
     private $title;
 
-    public function __construct($setIdentifier, $cardIdentifier, $title)
+    /**
+     * @param string $setIdentifier
+     * @param string $cardIdentifier
+     * @param string $title
+     * @param string $rarity
+     */
+    public function __construct($setIdentifier, $cardIdentifier, $title, $rarity)
     {
         $this->setIdentifier = $setIdentifier;
         $this->cardIdentifier = $cardIdentifier;
         $this->title = $title;
+        $this->rarity = $rarity;
     }
 
     /**
@@ -51,6 +63,14 @@ class CardSet
     }
 
     /**
+     * @return string
+     */
+    public function getRarity()
+    {
+        return $this->rarity;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -59,6 +79,7 @@ class CardSet
             'setIdentifier' => $this->getSetIdentifier(),
             'cardIdentifier' => $this->getCardIdentifier(),
             'title' => $this->getTitle(),
+            'rarity' => $this->getRarity(),
         ];
     }
 }

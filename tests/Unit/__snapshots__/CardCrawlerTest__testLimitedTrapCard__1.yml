@@ -1,0 +1,50 @@
+-
+    setIdentifier: OP09
+    cardIdentifier: DE023
+    title: 'OTS TOURNAMENT PACK 9'
+    rarity: Common
+-
+    setIdentifier: DUSA
+    cardIdentifier: DE049
+    title: 'DUELIST SAGA'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: LCYW
+    cardIdentifier: DE178
+    title: 'LEGENDARY COLLECTION 3 MEGA PACK'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: DB1
+    cardIdentifier: DE086
+    title: 'DARK BEGINNING 1'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: PSV
+    cardIdentifier: G104
+    title: 'PHARAOH''S SERVANT'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: OP09
+    cardIdentifier: EN023
+    title: 'OTS TOURNAMENT PACK 9'
+    rarity: Common
+-
+    setIdentifier: DUSA
+    cardIdentifier: EN049
+    title: 'DUELIST SAGA'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: LCYW
+    cardIdentifier: EN178
+    title: 'LEGENDARY COLLECTION 3 YUGI''S WORLD MEGA PACK'
+    rarity: 'Secret Rare'
+-
+    setIdentifier: DB1
+    cardIdentifier: EN086
+    title: 'DARK BEGINNING 1'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: PSV
+    cardIdentifier: '104'
+    title: 'PHARAOH''S SERVANT'
+    rarity: 'Secret Rare'

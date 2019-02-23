@@ -1,0 +1,85 @@
+-
+    setIdentifier: SS01
+    cardIdentifier: DEC08
+    title: 'SPEED DUEL STARTER DECK: DESTINY MASTERS'
+    rarity: Common
+-
+    setIdentifier: LED2
+    cardIdentifier: DE000
+    title: 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'
+    rarity: Common
+-
+    setIdentifier: MIL1
+    cardIdentifier: DE008
+    title: 'MILLENNIUM PACK'
+    rarity: Common
+-
+    setIdentifier: LCYW
+    cardIdentifier: DE113
+    title: 'LEGENDARY COLLECTION 3 MEGA PACK'
+    rarity: Rare
+-
+    setIdentifier: RP01
+    cardIdentifier: DE054
+    title: 'RETRO PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DB1
+    cardIdentifier: DE015
+    title: 'DARK BEGINNING 1'
+    rarity: 'Super Rare'
+-
+    setIdentifier: SDP
+    cardIdentifier: G001
+    title: 'STARTER DECK PEGASUS'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: SRL
+    cardIdentifier: G029
+    title: 'SPELL RULER'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: SS01
+    cardIdentifier: ENC08
+    title: 'SPEED DUEL STARTER DECK: DESTINY MASTERS'
+    rarity: Common
+-
+    setIdentifier: LED2
+    cardIdentifier: EN000
+    title: 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'
+    rarity: Common
+-
+    setIdentifier: MIL1
+    cardIdentifier: EN008
+    title: 'MILLENNIUM PACK'
+    rarity: Common
+-
+    setIdentifier: LCYW
+    cardIdentifier: EN113
+    title: 'LEGENDARY COLLECTION 3 YUGI''S WORLD MEGA PACK'
+    rarity: Rare
+-
+    setIdentifier: DLG1
+    cardIdentifier: EN055
+    title: 'DARK LEGENDS'
+    rarity: 'Super Rare'
+-
+    setIdentifier: RP01
+    cardIdentifier: EN054
+    title: 'RETRO PACK'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: DB1
+    cardIdentifier: EN015
+    title: 'DARK BEGINNING 1'
+    rarity: 'Super Rare'
+-
+    setIdentifier: SDP
+    cardIdentifier: '001'
+    title: 'STARTER DECK PEGASUS'
+    rarity: 'Ultra Rare'
+-
+    setIdentifier: MRL
+    cardIdentifier: '029'
+    title: 'SPELL RULER'
+    rarity: 'Ultra Rare'
