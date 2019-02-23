@@ -3,7 +3,7 @@
 if (!function_exists('fetchTrap')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\TrapCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchTrap($cardUrl)
     {
@@ -19,6 +19,6 @@ if (!function_exists('fetchTrap')) {
         $trapCard->is_forbidden = $card->isForbidden();
         $trapCard->is_limited = $card->isLimited();
 
-        return $trapCard;
+        return new \App\Entities\CardCarrier($trapCard, $card->getCardSets());
     }
 }

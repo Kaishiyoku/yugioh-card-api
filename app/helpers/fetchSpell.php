@@ -3,7 +3,7 @@
 if (!function_exists('fetchSpell')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\SpellCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchSpell($cardUrl)
     {
@@ -19,6 +19,6 @@ if (!function_exists('fetchSpell')) {
         $spellCard->is_forbidden = $card->isForbidden();
         $spellCard->is_limited = $card->isLimited();
 
-        return $spellCard;
+        return new \App\Entities\CardCarrier($spellCard, $card->getCardSets());
     }
 }

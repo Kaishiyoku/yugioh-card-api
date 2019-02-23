@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\XyzMonsterCard[] $xyzMonsterCards
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SynchroMonsterCard[] $synchroMonsterCards
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RitualMonsterCard[] $ritualMonsterCards
+ * @property string $title
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereTitle($value)
  */
 class Set extends Model
 {

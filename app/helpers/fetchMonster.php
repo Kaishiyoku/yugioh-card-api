@@ -3,7 +3,7 @@
 if (!function_exists('fetchMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\MonsterCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchMonster($cardUrl)
     {
@@ -38,6 +38,8 @@ if (!function_exists('fetchMonster')) {
         $monsterCard->is_forbidden = fetchIsForbidden($crawler, $converter);
         $monsterCard->is_limited = fetchIsLimited($crawler, $converter);
 
-        return $monsterCard;
+        $cardSets = $germanCardFields->getCardSets()->merge($englishCardFields->getCardSets());
+
+        return new \App\Entities\CardCarrier($monsterCard, $cardSets);
     }
 }

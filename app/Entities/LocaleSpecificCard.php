@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use Illuminate\Support\Collection;
+
 class LocaleSpecificCard
 {
     /**
@@ -20,15 +22,26 @@ class LocaleSpecificCard
     private $additionalText;
 
     /**
+     * @var Collection<CardSet>
+     */
+    private $cardSets;
+
+    /**
      * @param string $title
      * @param string $cardText
      * @param string $additionalText
+     * @param Collection<CardSet> $cardSets
      */
-    public function __construct($title, $cardText, $additionalText)
+    public function __construct($title, $cardText, $additionalText, $cardSets)
     {
+        if ($cardSets) {
+            $cardSets = collect();
+        }
+
         $this->title = $title;
         $this->cardText = $cardText;
         $this->additionalText = $additionalText;
+        $this->cardSets = $cardSets;
     }
 
     /**
@@ -53,5 +66,13 @@ class LocaleSpecificCard
     public function getAdditionalText(): string
     {
         return $this->additionalText;
+    }
+
+    /**
+     * @return Collection<CardSet>
+     */
+    public function getCardSets()
+    {
+        return $this->cardSets;
     }
 }

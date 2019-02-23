@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
+use App\Entities\CardSet;
 use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
 use App\Models\PendulumMonsterCard;
@@ -58,6 +59,8 @@ class YuGiOhCrawlerTest extends BaseCommand
         $this->testLimitedTrapCard();
         $this->testLimitedSpellCard();
 
+//        $this->testSetCrawler();
+
         $this->info('');
     }
 
@@ -78,7 +81,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007');
+        $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -111,7 +114,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351');
+        $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -147,7 +150,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = true;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906');
+        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -180,7 +183,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354');
+        $actualMonsterCard = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -213,7 +216,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629');
+        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -246,7 +249,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737');
+        $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -279,7 +282,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Cyberse/Link/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036');
+        $actualMonsterCard = fetchCard('MONSTER', '[Cyberse/Link/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -307,7 +310,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedSpellCard->is_forbidden = false;
         $expectedSpellCard->is_limited = false;
 
-        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134');
+        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134')->getCard();
 
         $differ = new MapDiffer();
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
@@ -335,7 +338,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedTrapCard->is_forbidden = false;
         $expectedTrapCard->is_limited = false;
 
-        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148');
+        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148')->getCard();
 
         $differ = new MapDiffer();
         $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
@@ -368,7 +371,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = true;
         $expectedMonsterCard->is_limited = false;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Insect/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440');
+        $actualMonsterCard = fetchCard('MONSTER', '[Insect/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -396,7 +399,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedSpellCard->is_forbidden = true;
         $expectedSpellCard->is_limited = false;
 
-        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907');
+        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907')->getCard();
 
         $differ = new MapDiffer();
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
@@ -424,7 +427,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedTrapCard->is_forbidden = true;
         $expectedTrapCard->is_limited = false;
 
-        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153');
+        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153')->getCard();
 
         $differ = new MapDiffer();
         $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
@@ -457,7 +460,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = true;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426');
+        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -493,7 +496,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->is_forbidden = false;
         $expectedMonsterCard->is_limited = true;
 
-        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Pendulum/Normal]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353');
+        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Pendulum/Normal]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353')->getCard();
 
         $differ = new MapDiffer();
         $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
@@ -521,7 +524,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedSpellCard->is_forbidden = false;
         $expectedSpellCard->is_limited = true;
 
-        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747');
+        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747')->getCard();
 
         $differ = new MapDiffer();
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
@@ -549,7 +552,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedTrapCard->is_forbidden = false;
         $expectedTrapCard->is_limited = true;
 
-        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960');
+        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960')->getCard();
 
         $differ = new MapDiffer();
         $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
@@ -564,4 +567,46 @@ class YuGiOhCrawlerTest extends BaseCommand
             $this->info(' [ok]   Limited Trap card crawler');
         }
     }
+
+//    private function testSetCrawler()
+//    {
+//        $toArrayMapper = function (CardSet $cardSet) {
+//            return $cardSet->toArray();
+//        };
+//
+//        $expectedSets = collect([
+//            new CardSet('SS01', 'ENC08', 'SPEED DUEL STARTER DECK: DESTINY MASTERS'),
+//            new CardSet('LED2', 'EN000', 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'),
+//            new CardSet('MIL1', 'EN008', 'MILLENNIUM PACK'),
+//            new CardSet('LCYW', 'EN113', 'LEGENDARY COLLECTION 3 YUGI\'S WORLD MEGA PACK'),
+//            new CardSet('DLG1', 'EN055', 'DARK LEGENDS'),
+//            new CardSet('RP01', 'EN054', 'RETRO PACK'),
+//            new CardSet('DB1', 'EN015', 'DARK BEGINNING 1'),
+//            new CardSet('SDP', '001', 'STARTER DECK PEGASUS'),
+//            new CardSet('MRL', '029', 'SPELL RULER'),
+//
+//            new CardSet('SS01', 'DEC08', 'SPEED DUEL STARTER DECK: DESTINY MASTERS'),
+//            new CardSet('LED2', 'DE000', 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'),
+//            new CardSet('MIL1', 'DE008', 'MILLENNIUM PACK'),
+//            new CardSet('LCYW', 'DE113', 'LEGENDARY COLLECTION 3 MEGA PACK'),
+//            new CardSet('RP01', 'DE054', 'RETRO PACK'),
+//            new CardSet('DB1', 'DE015', 'DARK BEGINNING 1'),
+//            new CardSet('SDP', 'G001', 'STARTER DECK PEGASUS'),
+//            new CardSet('SRL', 'G029', 'SPELL RULER'),
+//        ])->map($toArrayMapper);
+//        $actualSets = fetchCardSets('https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737')->map($toArrayMapper);
+//
+//        $differ = new MapDiffer(true);
+//        $diff = $differ->doDiff($expectedSets->toArray(), $actualSets->toArray());
+//
+//        if (count($diff) > 0) {
+//            $this->error(' [fail] Card Sets crawler');
+//
+//            $this->verbose(function () use ($diff) {
+//                $this->error(var_dump($diff));
+//            });
+//        } else {
+//            $this->info(' [ok]   Card Sets crawler');
+//        }
+//    }
 }

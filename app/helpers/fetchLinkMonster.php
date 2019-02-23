@@ -3,15 +3,15 @@
 if (!function_exists('fetchLinkMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\LinkMonsterCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchLinkMonster($cardUrl)
     {
-        $monsterCard = fetchMonster($cardUrl);
+        $cardCarrier = fetchMonster($cardUrl);
 
-        $linkMonsterCard = new \App\Models\LinkMonsterCard($monsterCard->toArray());
-        $linkMonsterCard->link = $monsterCard->level;
+        $linkMonsterCard = new \App\Models\LinkMonsterCard($cardCarrier->getCard()->toArray());
+        $linkMonsterCard->link = $cardCarrier->getCard()->level;
 
-        return $linkMonsterCard;
+        return new \App\Entities\CardCarrier($linkMonsterCard, $cardCarrier->getCardSets());
     }
 }

@@ -3,12 +3,14 @@
 if (!function_exists('fetchRitualMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\RitualMonsterCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchRitualMonster($cardUrl)
     {
-        $monsterCard = fetchMonster($cardUrl);
+        $cardCarrier = fetchMonster($cardUrl);
 
-        return new \App\Models\RitualMonsterCard($monsterCard->toArray());
+        $ritualMonsterCard = new \App\Models\RitualMonsterCard($cardCarrier->getCard()->toArray());
+
+        return new \App\Entities\CardCarrier($ritualMonsterCard, $cardCarrier->getCardSets());
     }
 }

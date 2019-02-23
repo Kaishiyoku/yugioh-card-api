@@ -57,6 +57,7 @@
             "app/helpers/fetchIsLimited.php",
             "app/helpers/fetchLinkMonster.php",
             "app/helpers/fetchLocaleSpecificCardFields.php",
+            "app/helpers/fetchLocalizedCardSets.php",
             "app/helpers/fetchMonster.php",
             "app/helpers/fetchPendulumMonster.php",
             "app/helpers/fetchRitualMonster.php",

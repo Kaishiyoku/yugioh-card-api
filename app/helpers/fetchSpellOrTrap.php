@@ -16,6 +16,8 @@ if (!function_exists('fetchSpellOrTrap')) {
 
         $tabularDetails = $crawler->filterXPath($converter->toXPath('table#details div.item_box'))->each(childrenRemover());
 
+        $cardSets = $germanCardFields->getCardSets()->merge($englishCardFields->getCardSets());
+
         return new \App\Entities\Card(
             $germanCardFields->getTitle(),
             $englishCardFields->getTitle(),
@@ -23,7 +25,8 @@ if (!function_exists('fetchSpellOrTrap')) {
             $germanCardFields->getCardText(),
             $englishCardFields->getCardText(),
             fetchIsForbidden($crawler, $converter),
-            fetchIsLimited($crawler, $converter)
+            fetchIsLimited($crawler, $converter),
+            $cardSets
         );
     }
 }

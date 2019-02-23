@@ -3,7 +3,7 @@
 if (!function_exists('fetchPendulumMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\PendulumMonsterCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchPendulumMonster($cardUrl)
     {
@@ -41,6 +41,8 @@ if (!function_exists('fetchPendulumMonster')) {
         $pendulumMonsterCard->is_forbidden = fetchIsForbidden($crawler, $converter);
         $pendulumMonsterCard->is_limited = fetchIsLimited($crawler, $converter);
 
-        return $pendulumMonsterCard;
+        $cardSets = $germanCardFields->getCardSets()->merge($englishCardFields->getCardSets());
+
+        return new \App\Entities\CardCarrier($pendulumMonsterCard, $cardSets);
     }
 }

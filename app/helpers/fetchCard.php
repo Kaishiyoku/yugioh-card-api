@@ -6,7 +6,7 @@ if (!function_exists('fetchCard')) {
      * @param $cardUrl
      * @param null $logger
      * @param $lang
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \App\Entities\CardCarrier
      */
     function fetchCard($attribute, $cardInfo, $cardUrl, $logger = null, $lang = 'en')
     {

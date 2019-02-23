@@ -27,6 +27,8 @@ if (!function_exists('fetchLocaleSpecificCardFields')) {
             $cardText = $boxDetails[1];
         }
 
-        return new \App\Entities\LocaleSpecificCard($title, $cardText, $additionalText);
+        $cardSets = fetchLocalizedCardSets($crawler);
+
+        return new \App\Entities\LocaleSpecificCard($title, $cardText, $additionalText, $cardSets);
     }
 }

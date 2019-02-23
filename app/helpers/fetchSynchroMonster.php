@@ -3,12 +3,14 @@
 if (!function_exists('fetchSynchroMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\SynchroMonsterCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchSynchroMonster($cardUrl)
     {
-        $monsterCard = fetchMonster($cardUrl);
+        $cardCarrier = fetchMonster($cardUrl);
 
-        return new \App\Models\SynchroMonsterCard($monsterCard->toArray());
+        $synchroMonsterCard = new \App\Models\SynchroMonsterCard($cardCarrier->getCard()->toArray());
+
+        return new \App\Entities\CardCarrier($synchroMonsterCard, $cardCarrier->getCardSets());
     }
 }

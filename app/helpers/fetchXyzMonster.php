@@ -3,15 +3,15 @@
 if (!function_exists('fetchXyzMonster')) {
     /**
      * @param string $cardUrl
-     * @return \App\Models\XyzMonsterCard
+     * @return \App\Entities\CardCarrier
      */
     function fetchXyzMonster($cardUrl)
     {
-        $monsterCard = fetchMonster($cardUrl);
+        $cardCarrier = fetchMonster($cardUrl);
 
-        $xyzMonsterCard = new \App\Models\XyzMonsterCard($monsterCard->toArray());
-        $xyzMonsterCard->rank = $monsterCard->level;
+        $xyzMonsterCard = new \App\Models\XyzMonsterCard($cardCarrier->getCard()->toArray());
+        $xyzMonsterCard->rank = $cardCarrier->getCard()->level;
 
-        return $xyzMonsterCard;
+        return new \App\Entities\CardCarrier($xyzMonsterCard, $cardCarrier->getCardSets());
     }
 }
