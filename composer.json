@@ -15,6 +15,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "michaelachrisco/readonly": "^0.33.0",
         "predis/predis": "^1.1",
         "symfony/css-selector": "^4.2",
         "symfony/dom-crawler": "^4.2"
@@ -53,6 +54,7 @@
             "app/helpers/fetchEnglishCardFields.php",
             "app/helpers/fetchGermanCardFields.php",
             "app/helpers/fetchIsForbidden.php",
+            "app/helpers/fetchIsLimited.php",
             "app/helpers/fetchLinkMonster.php",
             "app/helpers/fetchLocaleSpecificCardFields.php",
             "app/helpers/fetchMonster.php",
@@ -95,7 +97,7 @@
         "post-update-cmd": [
             "php artisan ide-helper:generate",
             "php artisan ide-helper:meta",
-            "php artisan ide-helper:models --dir=\"app/Models\" --write"
+            "php artisan ide-helper:models --dir=\"app/Models\" --write --ignore=\"App\\Models\\AllMonsterCard\""
         ]
     }
 }

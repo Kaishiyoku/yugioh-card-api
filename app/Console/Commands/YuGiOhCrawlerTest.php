@@ -47,8 +47,11 @@ class YuGiOhCrawlerTest extends BaseCommand
         $this->testSpellCard();
         $this->testTrapCard();
 
-        $this->testForbiddenTrapCard();
         $this->testForbiddenSpellCard();
+        $this->testForbiddenTrapCard();
+
+        $this->testLimitedTrapCard();
+        $this->testLimitedSpellCard();
 
         $this->info('');
     }
@@ -68,6 +71,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = 'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007';
         $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4007');
 
@@ -100,6 +104,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = 'You can reveal this card in your hand; your opponent randomly chooses 1 card from your entire hand, then you discard the chosen card. Then, if the discarded card was not "Danger! Ogopogo!", Special Summon 1 "Danger! Ogopogo!" from your hand, and if you do, draw 1 card. If this card is discarded: You can send 1 "Danger!" card from your Deck to the GY, except "Danger! Ogopogo!". You can only use this effect of "Danger! Ogopogo!" once per turn.';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351';
         $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14351');
 
@@ -135,6 +140,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = 'If a card(s) you control is destroyed by battle or card effect: You can Special Summon this card from your hand, then you can choose 1 monster in the Graveyard, Extra Deck, or that is banished, and that was destroyed this turn, and add 1 monster with the same name from your Deck to your hand. You can banish this card you control, plus 4 monsters from your hand, field, and/or Graveyard (1 each with "Pendulum Dragon", "Xyz Dragon", "Synchro Dragon", and "Fusion Dragon" in their names); Special Summon 1 "Supreme King Z-ARC" from your Extra Deck. (This is treated as a Fusion Summon.)';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906';
         $expectedMonsterCard->is_forbidden = true;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Pendulum/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=12906');
 
@@ -167,6 +173,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = '2 Level 4 monstersWhile this card has an Xyz Material attached that was originally WATER, all WATER monsters you control gain 500 ATK. Once per turn, during either player\'s turn: You can detach 1 Xyz Material from this card; any card effects that activate in your opponent\'s Graveyard cannot be activated this turn.';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354';
         $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', '[Xyz/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=10354');
 
@@ -199,6 +206,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = '1 Tuner + 1 or more non-Tuner monstersOnce per turn: You can send 1 "Synchron" monster from your Deck to the Graveyard, then activate 1 of these effects;●Increase this card\'s Level by the Level of the sent monster.●Reduce this card\'s Level by the Level of the sent monster.During your opponent\'s Main Phase, you can: Immediately after this effect resolves, Synchro Summon 1 Synchro Monster, using Materials including this card you control (this is a Quick Effect). You can only Synchro Summon "Accel Synchron(s)" once per turn.';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629';
         $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', '[Machine/Synchro/Tuner/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11629');
 
@@ -231,6 +239,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = 'You can Ritual Summon this card with "Black Illusion Ritual". Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card\'s ATK/DEF become equal to that equipped monster\'s. If this card would be destroyed by battle, destroy that equipped monster instead. While equipped with that monster, any battle damage you take from battles involving this card inflicts equal effect damage to your opponent.';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737';
         $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', '[Spellcaster/Ritual/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4737');
 
@@ -263,6 +272,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedMonsterCard->card_text_english = '2+ Effect MonstersGains 500 ATK for each monster it points to. When your opponent activates a card or effect that targets a card(s) you control (Quick Effect): You can Tribute 1 monster this card points to; negate the activation, and if you do, destroy that card.';
         $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036';
         $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = false;
 
         $actualMonsterCard = fetchCard('MONSTER', '[Cyberse/Link/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=13036');
 
@@ -290,6 +300,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedSpellCard->card_text_english = '(This card is always treated as a "Salamangreat" card.)Fusion Summon 1 "Salamangreat" Fusion Monster from your Extra Deck, using monsters from your hand and/or either field as Fusion Material. You can only activate 1 "Fusion of Fire" per turn.';
         $expectedSpellCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134';
         $expectedSpellCard->is_forbidden = false;
+        $expectedSpellCard->is_limited = false;
 
         $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14134');
 
@@ -317,6 +328,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedTrapCard->card_text_english = 'Special Summon any number of monsters with different names from your hand and/or GY, in Defense Position, that are all "Neo-Spacian" monsters or "Elemental HERO Neos", but negate their effects, and as long as you control any of those Special Summoned monsters face-up, you cannot Special Summon monsters from the Extra Deck, except Fusion Monsters. You can only activate 1 "NEXT" per turn. If you control no cards, you can activate this card from your hand.';
         $expectedTrapCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148';
         $expectedTrapCard->is_forbidden = false;
+        $expectedTrapCard->is_limited = false;
 
         $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=14148');
 
@@ -344,6 +356,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedSpellCard->card_text_english = 'Look at your opponent\'s hand. Select 1 card among them and return it to his/her Deck. The Deck is then shuffled.';
         $expectedSpellCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907';
         $expectedSpellCard->is_forbidden = true;
+        $expectedSpellCard->is_limited = false;
 
         $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4907');
 
@@ -351,13 +364,13 @@ class YuGiOhCrawlerTest extends BaseCommand
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
 
         if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
-            $this->error(' [fail] Spell card crawler');
+            $this->error(' [fail] Forbidden spell card crawler');
 
             $this->verbose(function () use ($spellCardDiff) {
                 $this->error(var_dump($spellCardDiff));
             });
         } else {
-            $this->info(' [ok]   Spell card crawler');
+            $this->info(' [ok]   Forbidden spell card crawler');
         }
     }
 
@@ -371,6 +384,7 @@ class YuGiOhCrawlerTest extends BaseCommand
         $expectedTrapCard->card_text_english = 'Neither player can Special Summon monsters. If a card is sent from the Deck or the field to your Graveyard: Destroy this card.';
         $expectedTrapCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153';
         $expectedTrapCard->is_forbidden = true;
+        $expectedTrapCard->is_limited = false;
 
         $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=9153');
 
@@ -385,6 +399,62 @@ class YuGiOhCrawlerTest extends BaseCommand
             });
         } else {
             $this->info(' [ok]   Forbidden trap card crawler');
+        }
+    }
+
+    private function testLimitedSpellCard()
+    {
+        $expectedSpellCard = new SpellCard();
+        $expectedSpellCard->title_german = 'Notfallteleport';
+        $expectedSpellCard->title_english = 'Emergency Teleport';
+        $expectedSpellCard->icon = 'Quick-Play Spell';
+        $expectedSpellCard->card_text_german = 'Beschwöre 1 Monster vom Typ Psi der Stufe 3 oder niedriger als Spezialbeschwörung von deiner Hand oder deinem Deck, aber verbanne es während der End Phase dieses Spielzugs.';
+        $expectedSpellCard->card_text_english = 'Special Summon 1 Level 3 or lower Psychic-Type monster from your hand or Deck, but banish it during the End Phase of this turn.';
+        $expectedSpellCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747';
+        $expectedSpellCard->is_forbidden = false;
+        $expectedSpellCard->is_limited = true;
+
+        $actualSpellCard = fetchCard('SPELL', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7747');
+
+        $differ = new MapDiffer();
+        $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
+
+        if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
+            $this->error(' [fail] Limited spell card crawler');
+
+            $this->verbose(function () use ($spellCardDiff) {
+                $this->error(var_dump($spellCardDiff));
+            });
+        } else {
+            $this->info(' [ok]   Limited spell card crawler');
+        }
+    }
+
+    private function testLimitedTrapCard()
+    {
+        $expectedTrapCard = new TrapCard();
+        $expectedTrapCard->title_german = 'Kaiserlicher Befehl';
+        $expectedTrapCard->title_english = 'Imperial Order';
+        $expectedTrapCard->icon = 'Continuous Trap';
+        $expectedTrapCard->card_text_german = 'Annulliere alle Zaubereffekte auf dem Spielfeld. Einmal pro Spielzug, während der Standby Phase, musst du 700 LP zahlen (dies ist nicht optional) oder diese Karte wird zerstört.';
+        $expectedTrapCard->card_text_english = 'Negate all Spell effects on the field. Once per turn, during the Standby Phase, you must pay 700 LP (this is not optional), or this card is destroyed.';
+        $expectedTrapCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960';
+        $expectedTrapCard->is_forbidden = false;
+        $expectedTrapCard->is_limited = true;
+
+        $actualTrapCard = fetchCard('TRAP', null, 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960');
+
+        $differ = new MapDiffer();
+        $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
+
+        if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
+            $this->error(' [fail] Limited trap card crawler');
+
+            $this->verbose(function () use ($trapCardDiff) {
+                $this->error(var_dump($trapCardDiff));
+            });
+        } else {
+            $this->info(' [ok]   Limited trap card crawler');
         }
     }
 }

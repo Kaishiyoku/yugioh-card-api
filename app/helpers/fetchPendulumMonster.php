@@ -38,12 +38,8 @@ if (!function_exists('fetchPendulumMonster')) {
         $pendulumMonsterCard->card_text_german = $germanCardFields->getCardText();
         $pendulumMonsterCard->card_text_english = $englishCardFields->getCardText();
         $pendulumMonsterCard->url = $cardUrl;
-
-        $forbiddenNode = $crawler->filterXPath($converter->toXPath('div.forbidden_limited > span'));
-
-        if ($forbiddenNode->count() > 0) {
-            $pendulumMonsterCard->is_forbidden = $forbiddenNode->text() == 'Forbidden';
-        }
+        $pendulumMonsterCard->is_forbidden = fetchIsForbidden($crawler, $converter);
+        $pendulumMonsterCard->is_limited = fetchIsLimited($crawler, $converter);
 
         return $pendulumMonsterCard;
     }

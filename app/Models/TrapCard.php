@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereUrl($value)
  * @property int $is_forbidden
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereIsForbidden($value)
+ * @property bool $is_limited
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereIsLimited($value)
  */
 class TrapCard extends Model
 {
@@ -47,6 +49,18 @@ class TrapCard extends Model
         'card_text_german',
         'card_text_english',
         'url',
+        'is_forbidden',
+        'is_limited',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_forbidden' => 'boolean',
+        'is_limited' => 'boolean',
     ];
 
     public function sets()

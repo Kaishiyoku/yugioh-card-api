@@ -36,6 +36,7 @@ if (!function_exists('fetchMonster')) {
         $monsterCard->card_text_english = $englishCardFields->getCardText();
         $monsterCard->url = $cardUrl;
         $monsterCard->is_forbidden = fetchIsForbidden($crawler, $converter);
+        $monsterCard->is_limited = fetchIsLimited($crawler, $converter);
 
         return $monsterCard;
     }

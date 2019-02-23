@@ -3,21 +3,23 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Models\AllMonsterCard;
 
 class CardController extends Controller
 {
     public function index()
     {
-        $allMonsterCards = DB::table('all_monster_cards')->get();
+        $allMonsterCards = AllMonsterCard::orderBy('title_german')
+            ->orderBy('title_english')
+            ->get()
+        ;
 
         return response()->json($allMonsterCards);
     }
 
     public function search($title)
     {
-        $allMonsterCards = DB::table('all_monster_cards')
-            ->where('title_german', 'LIKE', '%' . $title . '%')
+        $allMonsterCards = AllMonsterCard::where('title_german', 'LIKE', '%' . $title . '%')
             ->orWhere('title_english', 'LIKE', '%' . $title . '%')
             ->get()
         ;

@@ -22,7 +22,8 @@ if (!function_exists('fetchSpellOrTrap')) {
             $tabularDetails[0],
             $germanCardFields->getCardText(),
             $englishCardFields->getCardText(),
-            fetchIsForbidden($crawler, $converter)
+            fetchIsForbidden($crawler, $converter),
+            fetchIsLimited($crawler, $converter)
         );
     }
 }

@@ -42,6 +42,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property bool $is_forbidden
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\XyzMonsterCard whereIsForbidden($value)
+ * @property bool $is_limited
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\XyzMonsterCard whereIsLimited($value)
  */
 class XyzMonsterCard extends Model
 {
@@ -63,6 +65,7 @@ class XyzMonsterCard extends Model
         'card_text_english',
         'url',
         'is_forbidden',
+        'is_limited',
     ];
 
     /**
@@ -72,6 +75,7 @@ class XyzMonsterCard extends Model
      */
     protected $casts = [
         'is_forbidden' => 'boolean',
+        'is_limited' => 'boolean',
     ];
 
     public function sets()

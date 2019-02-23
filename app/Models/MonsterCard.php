@@ -48,6 +48,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereAdditionalValue($value)
  * @property bool $is_forbidden
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereIsForbidden($value)
+ * @property bool $is_limited
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MonsterCard whereIsLimited($value)
  */
 class MonsterCard extends Model
 {
@@ -69,6 +71,7 @@ class MonsterCard extends Model
         'card_text_english',
         'url',
         'is_forbidden',
+        'is_limited',
     ];
 
     /**
@@ -78,6 +81,7 @@ class MonsterCard extends Model
      */
     protected $casts = [
         'is_forbidden' => 'boolean',
+        'is_limited' => 'boolean',
     ];
 
     public function sets()
