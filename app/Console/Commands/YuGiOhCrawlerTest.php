@@ -47,8 +47,13 @@ class YuGiOhCrawlerTest extends BaseCommand
         $this->testSpellCard();
         $this->testTrapCard();
 
+        $this->testForbiddenEffectMonsterCard();
+
         $this->testForbiddenSpellCard();
         $this->testForbiddenTrapCard();
+
+        $this->testLimitedEffectMonsterCard();
+        $this->testLimitedPendulumMonsterCard();
 
         $this->testLimitedTrapCard();
         $this->testLimitedSpellCard();
@@ -346,6 +351,39 @@ class YuGiOhCrawlerTest extends BaseCommand
         }
     }
 
+    private function testForbiddenEffectMonsterCard()
+    {
+        $expectedMonsterCard = new MonsterCard();
+        $expectedMonsterCard->title_german = 'Stufenfresser';
+        $expectedMonsterCard->title_english = 'Level Eater';
+        $expectedMonsterCard->attribute = 'DARK';
+        $expectedMonsterCard->level = 1;
+        $expectedMonsterCard->monster_type = 'Insect';
+        $expectedMonsterCard->card_type = 'Effect';
+        $expectedMonsterCard->atk = '600';
+        $expectedMonsterCard->def = '0';
+        $expectedMonsterCard->card_text_german = 'Falls sich diese Karte in deinem Friedhof befindet: Du kannst 1 Monster der Stufe 5 oder höher wählen, das du kontrollierst; verringere seine Stufe um 1 und falls du dies tust, beschwöre diese Karte als Spezialbeschwörung. Diese offene Karte auf dem Spielfeld kann nicht als Tribut angeboten werden, außer für eine Tributbeschwörung.';
+        $expectedMonsterCard->card_text_english = 'If this card is in your Graveyard: You can target 1 Level 5 or higher monster you control; reduce its Level by 1, and if you do, Special Summon this card. This face-up card on the field cannot be Tributed, except for a Tribute Summon.';
+        $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440';
+        $expectedMonsterCard->is_forbidden = true;
+        $expectedMonsterCard->is_limited = false;
+
+        $actualMonsterCard = fetchCard('MONSTER', '[Insect/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=8440');
+
+        $differ = new MapDiffer();
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
+            $this->error(' [fail] Forbidden Effect monster card crawler');
+
+            $this->verbose(function () use ($monsterCardDiff) {
+                $this->error(var_dump($monsterCardDiff));
+            });
+        } else {
+            $this->info(' [ok]   Forbidden Effect monster card crawler');
+        }
+    }
+
     private function testForbiddenSpellCard()
     {
         $expectedSpellCard = new SpellCard();
@@ -364,13 +402,13 @@ class YuGiOhCrawlerTest extends BaseCommand
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
 
         if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
-            $this->error(' [fail] Forbidden spell card crawler');
+            $this->error(' [fail] Forbidden Spell card crawler');
 
             $this->verbose(function () use ($spellCardDiff) {
                 $this->error(var_dump($spellCardDiff));
             });
         } else {
-            $this->info(' [ok]   Forbidden spell card crawler');
+            $this->info(' [ok]   Forbidden Spell card crawler');
         }
     }
 
@@ -392,13 +430,82 @@ class YuGiOhCrawlerTest extends BaseCommand
         $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
 
         if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
-            $this->error(' [fail] Forbidden trap card crawler');
+            $this->error(' [fail] Forbidden Trap card crawler');
 
             $this->verbose(function () use ($trapCardDiff) {
                 $this->error(var_dump($trapCardDiff));
             });
         } else {
-            $this->info(' [ok]   Forbidden trap card crawler');
+            $this->info(' [ok]   Forbidden Trap card crawler');
+        }
+    }
+
+    private function testLimitedEffectMonsterCard()
+    {
+        $expectedMonsterCard = new MonsterCard();
+        $expectedMonsterCard->title_german = 'Cyber-Stein';
+        $expectedMonsterCard->title_english = 'Cyber-Stein';
+        $expectedMonsterCard->attribute = 'DARK';
+        $expectedMonsterCard->level = 2;
+        $expectedMonsterCard->monster_type = 'Machine';
+        $expectedMonsterCard->card_type = 'Effect';
+        $expectedMonsterCard->atk = '700';
+        $expectedMonsterCard->def = '500';
+        $expectedMonsterCard->card_text_german = 'Zahle 5000 Life Points. Beschwöre als Spezialbeschwörung 1 Fusionsmonster aus deinem Extra Deck auf das Spielfeld in Angriffsposition.';
+        $expectedMonsterCard->card_text_english = 'Pay 5000 Life Points. Special Summon 1 Fusion Monster from your Extra Deck to the field in Attack Position.';
+        $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426';
+        $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = true;
+
+        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Effect]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4426');
+
+        $differ = new MapDiffer();
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
+            $this->error(' [fail] Limited Effect monster card crawler');
+
+            $this->verbose(function () use ($monsterCardDiff) {
+                $this->error(var_dump($monsterCardDiff));
+            });
+        } else {
+            $this->info(' [ok]   Limited Effect monster card crawler');
+        }
+    }
+
+    private function testLimitedPendulumMonsterCard()
+    {
+        $expectedMonsterCard = new PendulumMonsterCard();
+        $expectedMonsterCard->title_german = 'Qliphort-Kundschafter';
+        $expectedMonsterCard->title_english = 'Qliphort Scout';
+        $expectedMonsterCard->attribute = 'EARTH';
+        $expectedMonsterCard->level = 5;
+        $expectedMonsterCard->pendulum_scale = 9;
+        $expectedMonsterCard->pendulum_effect_german = 'Du kannst keine Monster als Spezialbeschwörung beschwören, außer „Qli“-Monstern. Dieser Effekt kann nicht annulliert werden. Einmal pro Spielzug: Du kannst 800 LP zahlen; füge deiner Hand 1 „Qli“-Karte von deinem Deck hinzu, außer „Qliphort-Kundschafter“.';
+        $expectedMonsterCard->pendulum_effect_english = 'You cannot Special Summon monsters, except "Qli" monsters. This effect cannot be negated. Once per turn: You can pay 800 LP; add 1 "Qli" card from your Deck to your hand, except "Qliphort Scout".';
+        $expectedMonsterCard->monster_type = 'Machine';
+        $expectedMonsterCard->card_type = 'Pendulum/Normal';
+        $expectedMonsterCard->atk = '1000';
+        $expectedMonsterCard->def = '2800';
+        $expectedMonsterCard->card_text_german = 'Replika-Modus wird gebootet...Fehler beim Ausführen von C:\sophia\zefra.exeUnbekannter Entwickler.C:\tierra\qliphort.exe zulassen? <J/N&gt...[J]Autonomie-Modus wird gebootet…';
+        $expectedMonsterCard->card_text_english = 'Booting in Replica Mode...An error has occurred while executing C:\sophia\zefra.exeUnknown publisher.Allow C:\tierra\qliphort.exe ? <Y/N>...[Y]Booting in Autonomy Mode…';
+        $expectedMonsterCard->url = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353';
+        $expectedMonsterCard->is_forbidden = false;
+        $expectedMonsterCard->is_limited = true;
+
+        $actualMonsterCard = fetchCard('MONSTER', '[Machine/Pendulum/Normal]', 'https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=11353');
+
+        $differ = new MapDiffer();
+        $monsterCardDiff = $differ->doDiff($expectedMonsterCard->toArray(), $actualMonsterCard->toArray());
+
+        if (count($monsterCardDiff) > 0 || !isSameClass($expectedMonsterCard, $actualMonsterCard)) {
+            $this->error(' [fail] Limited Pendulum monster card crawler');
+
+            $this->verbose(function () use ($monsterCardDiff) {
+                $this->error(var_dump($monsterCardDiff));
+            });
+        } else {
+            $this->info(' [ok]   Limited Pendulum monster card crawler');
         }
     }
 
@@ -420,13 +527,13 @@ class YuGiOhCrawlerTest extends BaseCommand
         $spellCardDiff = $differ->doDiff($expectedSpellCard->toArray(), $actualSpellCard->toArray());
 
         if (count($spellCardDiff) > 0 || !isSameClass($expectedSpellCard, $actualSpellCard)) {
-            $this->error(' [fail] Limited spell card crawler');
+            $this->error(' [fail] Limited Spell card crawler');
 
             $this->verbose(function () use ($spellCardDiff) {
                 $this->error(var_dump($spellCardDiff));
             });
         } else {
-            $this->info(' [ok]   Limited spell card crawler');
+            $this->info(' [ok]   Limited Spell card crawler');
         }
     }
 
@@ -448,13 +555,13 @@ class YuGiOhCrawlerTest extends BaseCommand
         $trapCardDiff = $differ->doDiff($expectedTrapCard->toArray(), $actualTrapCard->toArray());
 
         if (count($trapCardDiff) > 0 || !isSameClass($expectedTrapCard, $actualTrapCard)) {
-            $this->error(' [fail] Limited trap card crawler');
+            $this->error(' [fail] Limited Trap card crawler');
 
             $this->verbose(function () use ($trapCardDiff) {
                 $this->error(var_dump($trapCardDiff));
             });
         } else {
-            $this->info(' [ok]   Limited trap card crawler');
+            $this->info(' [ok]   Limited Trap card crawler');
         }
     }
 }
