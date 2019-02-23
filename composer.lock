@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c74bc7f37b45e03616a22aeb1257f135",
+    "content-hash": "8915919b823433555e885071e47a0f84",
     "packages": [
         {
             "name": "diff/diff",
@@ -5976,7 +5976,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1.3",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": []
 }

@@ -16,6 +16,7 @@ if (!function_exists('fetchSpell')) {
         $spellCard->card_text_german = $card->getCardTextGerman();
         $spellCard->card_text_english = $card->getCardTextEnglish();
         $spellCard->url = $cardUrl;
+        $spellCard->is_forbidden = $card->isForbidden();
 
         return $spellCard;
     }

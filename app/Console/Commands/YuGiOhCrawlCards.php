@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Console\BaseCommand;
 use App\Entities\SetLink;
 use App\Jobs\ProcessSetLink;
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
-class YuGiOhCrawlCards extends Command
+class YuGiOhCrawlCards extends BaseCommand
 {
     /**
      * The name and signature of the console command.

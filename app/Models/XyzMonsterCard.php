@@ -40,6 +40,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\XyzMonsterCard whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\XyzMonsterCard whereUrl($value)
  * @mixin \Eloquent
+ * @property bool $is_forbidden
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\XyzMonsterCard whereIsForbidden($value)
  */
 class XyzMonsterCard extends Model
 {
@@ -60,6 +62,16 @@ class XyzMonsterCard extends Model
         'card_text_german',
         'card_text_english',
         'url',
+        'is_forbidden',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_forbidden' => 'boolean',
     ];
 
     public function sets()

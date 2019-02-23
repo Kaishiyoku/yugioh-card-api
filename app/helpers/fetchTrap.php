@@ -16,6 +16,7 @@ if (!function_exists('fetchTrap')) {
         $trapCard->card_text_german = $card->getCardTextGerman();
         $trapCard->card_text_english = $card->getCardTextEnglish();
         $trapCard->url = $cardUrl;
+        $trapCard->is_forbidden = $card->isForbidden();
 
         return $trapCard;
     }

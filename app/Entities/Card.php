@@ -30,19 +30,26 @@ class Card
     private $cardTextEnglish;
 
     /**
+     * @var bool
+     */
+    private $isForbidden;
+
+    /**
      * @param string $titleGerman
      * @param string $titleEnglish
      * @param string $icon
      * @param string $cardTextGerman
      * @param string $cardTextEnglish
+     * @param bool $isForbidden
      */
-    public function __construct($titleGerman, $titleEnglish, $icon, $cardTextGerman, $cardTextEnglish)
+    public function __construct($titleGerman, $titleEnglish, $icon, $cardTextGerman, $cardTextEnglish, $isForbidden)
     {
         $this->titleGerman = $titleGerman;
         $this->titleEnglish = $titleEnglish;
         $this->icon = $icon;
         $this->cardTextGerman = $cardTextGerman;
         $this->cardTextEnglish = $cardTextEnglish;
+        $this->isForbidden = $isForbidden;
     }
 
     /**
@@ -83,5 +90,13 @@ class Card
     public function getCardTextEnglish(): string
     {
         return $this->cardTextEnglish;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForbidden(): bool
+    {
+        return $this->isForbidden;
     }
 }

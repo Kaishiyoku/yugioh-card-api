@@ -46,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PendulumMonsterCard whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PendulumMonsterCard whereUrl($value)
  * @mixin \Eloquent
+ * @property bool $is_forbidden
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PendulumMonsterCard whereIsForbidden($value)
  */
 class PendulumMonsterCard extends Model
 {
@@ -69,6 +71,16 @@ class PendulumMonsterCard extends Model
         'additional_text_german',
         'additional_text_english',
         'additional_value',
+        'is_forbidden',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_forbidden' => 'boolean',
     ];
 
     public function sets()

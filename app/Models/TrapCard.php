@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereUpdatedAt($value)
  * @property string $url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereUrl($value)
+ * @property int $is_forbidden
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TrapCard whereIsForbidden($value)
  */
 class TrapCard extends Model
 {

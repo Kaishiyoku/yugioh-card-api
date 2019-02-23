@@ -52,6 +52,7 @@
             "app/helpers/fetchCard.php",
             "app/helpers/fetchEnglishCardFields.php",
             "app/helpers/fetchGermanCardFields.php",
+            "app/helpers/fetchIsForbidden.php",
             "app/helpers/fetchLinkMonster.php",
             "app/helpers/fetchLocaleSpecificCardFields.php",
             "app/helpers/fetchMonster.php",
