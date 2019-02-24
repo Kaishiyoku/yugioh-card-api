@@ -17,6 +17,7 @@
         "laravel/framework": "5.7.*",
         "laravel/horizon": "^2.2",
         "laravel/tinker": "^1.0",
+        "laravelcollective/html": "^5.7",
         "michaelachrisco/readonly": "^0.33.0",
         "predis/predis": "^1.1",
         "symfony/css-selector": "^4.2",

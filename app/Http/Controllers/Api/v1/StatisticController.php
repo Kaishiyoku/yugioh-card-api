@@ -13,6 +13,7 @@ use App\Models\SpellCard;
 use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
+use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
 {
@@ -27,9 +28,11 @@ class StatisticController extends Controller
         };
 
         return response()->json([
-            'total_numbers_of_unique_cards' => $this->getCardsFor($countFn),
+            'number_of_cards' => DB::table('all_cards')->count(),
+            'number_of_cards_by_type' => $this->getCardsFor($countFn),
             'number_of_sets' => Set::count(),
-            'number_of_set_cards' => $this->getCardsFor($setCardsCountFn),
+            'number_of_set_cards' => Setable::count(),
+            'number_of_set_cards_by_type' => $this->getCardsFor($setCardsCountFn),
         ]);
     }
 
