@@ -21,6 +21,8 @@ Route::prefix('v1')->middleware('api')->group(function () {
 
     Route::get('/sets', 'Api\v1\SetController@index');
     Route::get('/sets/search/{term}', 'Api\v1\SetController@search');
+
+    Route::Get('/statistics', 'Api\v1\StatisticController@index');
 });
 
 Route::fallback(function () {

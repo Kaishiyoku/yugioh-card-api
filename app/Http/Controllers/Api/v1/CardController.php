@@ -23,7 +23,7 @@ class CardController extends Controller
             return $this->withCardSetMapper($this->withDefaultCardOperations($cardClass)->get());
         };
 
-        return $this->getCardsResponse($withMapperAndOperations);
+        return CardController::getCardsResponse($withMapperAndOperations);
     }
 
     public function search($title)
@@ -34,7 +34,7 @@ class CardController extends Controller
             };
         };
 
-        return $this->getCardsResponse($withMapperAndOperations($title));
+        return CardController::getCardsResponse($withMapperAndOperations($title));
     }
 
     public function getCardFromSet($identifier)
@@ -92,7 +92,7 @@ class CardController extends Controller
             ->orWhere('title_english', 'LIKE', '%' . $title . '%');
     }
 
-    private function getCardsResponse($operatorFn)
+    private static function getCardsResponse($operatorFn)
     {
         $monsterCards = $operatorFn(MonsterCard::class);
         $ritualMonsterCards = $operatorFn(RitualMonsterCard::class);
