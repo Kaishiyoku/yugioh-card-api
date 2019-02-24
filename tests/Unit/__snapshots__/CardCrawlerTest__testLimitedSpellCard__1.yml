@@ -3,48 +3,58 @@
     cardIdentifier: DE081
     title: 'PREMIUM GOLD: INFINITE GOLD'
     rarity: 'Gold Rare'
+    lang: de
 -
     setIdentifier: HSRD
     cardIdentifier: DE054
     title: 'HIGH-SPEED RIDERS'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: LC5D
     cardIdentifier: DE251
     title: 'LEGENDARY COLLECTION 5D''s MEGA PACK'
     rarity: 'Secret Rare'
+    lang: de
 -
     setIdentifier: TDGS
     cardIdentifier: DE053
     title: 'THE DUELIST GENESIS'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: TDGS
     cardIdentifier: DE053
     title: 'THE DUELIST GENESIS'
     rarity: 'Ultimate Rare'
+    lang: de
 -
     setIdentifier: PGL3
     cardIdentifier: EN081
     title: 'PREMIUM GOLD: INFINITE GOLD'
     rarity: 'Gold Rare'
+    lang: en
 -
     setIdentifier: HSRD
     cardIdentifier: EN054
     title: 'HIGH-SPEED RIDERS'
     rarity: 'Ultra Rare'
+    lang: en
 -
     setIdentifier: LC5D
     cardIdentifier: EN251
     title: 'LEGENDARY COLLECTION 5D''s MEGA PACK'
     rarity: 'Secret Rare'
+    lang: en
 -
     setIdentifier: TDGS
     cardIdentifier: EN053
     title: 'THE DUELIST GENESIS'
     rarity: 'Ultra Rare'
+    lang: en
 -
     setIdentifier: TDGS
     cardIdentifier: EN053
     title: 'THE DUELIST GENESIS'
     rarity: 'Ultimate Rare'
+    lang: en

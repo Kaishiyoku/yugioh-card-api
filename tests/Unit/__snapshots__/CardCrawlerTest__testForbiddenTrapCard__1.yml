@@ -3,28 +3,34 @@
     cardIdentifier: DE059
     title: 'THE SECRET FORCES'
     rarity: 'Super Rare'
+    lang: de
 -
     setIdentifier: LC5D
     cardIdentifier: DE253
     title: 'LEGENDARY COLLECTION 5D''s MEGA PACK'
     rarity: 'Secret Rare'
+    lang: de
 -
     setIdentifier: STBL
     cardIdentifier: DE076
     title: 'STARSTRIKE BLAST'
     rarity: Common
+    lang: de
 -
     setIdentifier: THSF
     cardIdentifier: EN059
     title: 'THE SECRET FORCES'
     rarity: 'Super Rare'
+    lang: en
 -
     setIdentifier: LC5D
     cardIdentifier: EN253
     title: 'LEGENDARY COLLECTION 5D''s MEGA PACK'
     rarity: 'Secret Rare'
+    lang: en
 -
     setIdentifier: STBL
     cardIdentifier: EN076
     title: 'STARSTRIKE BLAST'
     rarity: Common
+    lang: en

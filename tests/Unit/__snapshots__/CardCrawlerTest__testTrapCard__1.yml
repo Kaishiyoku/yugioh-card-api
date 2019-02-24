@@ -3,8 +3,10 @@
     cardIdentifier: DE071
     title: 'SAVAGE STRIKE'
     rarity: 'Super Rare'
+    lang: de
 -
     setIdentifier: SAST
     cardIdentifier: EN071
     title: 'SAVAGE STRIKE'
     rarity: 'Super Rare'
+    lang: en

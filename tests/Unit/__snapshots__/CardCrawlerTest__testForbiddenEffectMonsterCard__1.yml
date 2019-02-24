@@ -3,73 +3,88 @@
     cardIdentifier: DE020
     title: 'STRUCTURE DECK EMPEROR OF DARKNESS'
     rarity: Common
+    lang: de
 -
     setIdentifier: SDSE
     cardIdentifier: DE017
     title: 'STRUCTURE DECK SYNCHRON EXTREME'
     rarity: Common
+    lang: de
 -
     setIdentifier: LC5D
     cardIdentifier: DE014
     title: 'LEGENDARY COLLECTION 5D''s MEGA PACK'
     rarity: Rare
+    lang: de
 -
     setIdentifier: BP01
     cardIdentifier: DE209
     title: 'BATTLE PACK EPIC DAWN'
     rarity: Common
+    lang: de
 -
     setIdentifier: BP01
     cardIdentifier: DE209
     title: 'BATTLE PACK EPIC DAWN'
     rarity: Common
+    lang: de
 -
     setIdentifier: DP09
     cardIdentifier: DE011
     title: 'DUELIST PACK YUSEI 2'
     rarity: Common
+    lang: de
 -
     setIdentifier: SOVR
     cardIdentifier: DE005
     title: 'STARDUST OVERDRIVE'
     rarity: Common
+    lang: de
 -
     setIdentifier: SR01
     cardIdentifier: EN020
     title: 'EMPEROR OF DARKNESS STRUCTURE DECK'
     rarity: Common
+    lang: en
 -
     setIdentifier: SDSE
     cardIdentifier: EN017
     title: 'SYNCHRON EXTREME STRUCTURE DECK'
     rarity: Common
+    lang: en
 -
     setIdentifier: LC5D
     cardIdentifier: EN014
     title: 'LEGENDARY COLLECTION 5D''s MEGA PACK'
     rarity: Rare
+    lang: en
 -
     setIdentifier: BP01
     cardIdentifier: EN209
     title: 'BATTLE PACK EPIC DAWN'
     rarity: Common
+    lang: en
 -
     setIdentifier: BP01
     cardIdentifier: EN209
     title: 'BATTLE PACK EPIC DAWN'
     rarity: Hobby
+    lang: en
 -
     setIdentifier: DT05
     cardIdentifier: EN005
     title: 'DUEL TERMINAL 5A'
     rarity: Common
+    lang: en
 -
     setIdentifier: DP09
     cardIdentifier: EN011
     title: 'DUELIST PACK - YUSEI 2 -'
     rarity: Common
+    lang: en
 -
     setIdentifier: SOVR
     cardIdentifier: EN005
     title: 'STARDUST OVERDRIVE'
     rarity: Common
+    lang: en

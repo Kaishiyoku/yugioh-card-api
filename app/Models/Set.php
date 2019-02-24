@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RitualMonsterCard[] $ritualMonsterCards
  * @property string $title
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereTitle($value)
+ * @property string $title_german
+ * @property string $title_english
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereTitleEnglish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Set whereTitleGerman($value)
  */
 class Set extends Model
 {
@@ -39,6 +43,9 @@ class Set extends Model
      */
     protected $fillable = [
         'identifier',
+        'rarity',
+        'title_german',
+        'title_english',
     ];
 
     public function monsterCards()

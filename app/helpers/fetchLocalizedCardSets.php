@@ -3,13 +3,14 @@
 if (!function_exists('fetchLocalizedCardSets')) {
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $node
+     * @param string $lang
      * @return \Illuminate\Support\Collection<\App\Entities\CardSet>
      */
-    function fetchLocalizedCardSets(\Symfony\Component\DomCrawler\Crawler $node)
+    function fetchLocalizedCardSets(\Symfony\Component\DomCrawler\Crawler $node, $lang)
     {
         $converter = new \Symfony\Component\CssSelector\CssSelectorConverter();
 
-        return collect($node->filterXPath($converter->toXPath('div#pack_list tr.row'))->each(function (\Symfony\Component\DomCrawler\Crawler $subNode) use ($converter) {
+        return collect($node->filterXPath($converter->toXPath('div#pack_list tr.row'))->each(function (\Symfony\Component\DomCrawler\Crawler $subNode) use ($converter, $lang) {
             $values = $subNode->filterXPath($converter->toXPath('td'))->each(function (\Symfony\Component\DomCrawler\Crawler $subSubNode) {
                 return trim($subSubNode->text());
             });
@@ -24,7 +25,7 @@ if (!function_exists('fetchLocalizedCardSets')) {
 
             $rarity = $rarityNode->count() > 0 ? $rarityNode->attr('alt') : 'Common';
 
-            return new \App\Entities\CardSet($setIdentifier, $cardIdentifier, $title, $rarity);
+            return new \App\Entities\CardSet($setIdentifier, $cardIdentifier, $title, $rarity, $lang);
         }));
     }
 }

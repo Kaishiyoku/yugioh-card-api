@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSetableTable extends Migration
+class AddIdentifierToSetablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateSetableTable extends Migration
      */
     public function up()
     {
-        Schema::create('setable', function (Blueprint $table) {
-            $table->unsignedInteger('set_id');
-            $table->unsignedInteger('setable_id');
-            $table->string('setable_type');
-            $table->timestamps();
+        Schema::table('setables', function (Blueprint $table) {
+            $table->string('identifier');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateSetableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setable');
+        Schema::table('setables', function (Blueprint $table) {
+            $table->dropColumn('identifier');
+        });
     }
 }

@@ -25,17 +25,24 @@ class CardSet
     private $title;
 
     /**
+     * @var string
+     */
+    private $lang;
+
+    /**
      * @param string $setIdentifier
      * @param string $cardIdentifier
      * @param string $title
      * @param string $rarity
+     * @param string $lang
      */
-    public function __construct($setIdentifier, $cardIdentifier, $title, $rarity)
+    public function __construct($setIdentifier, $cardIdentifier, $title, $rarity, $lang)
     {
         $this->setIdentifier = $setIdentifier;
         $this->cardIdentifier = $cardIdentifier;
         $this->title = $title;
         $this->rarity = $rarity;
+        $this->lang = $lang;
     }
 
     /**
@@ -71,6 +78,14 @@ class CardSet
     }
 
     /**
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -80,6 +95,7 @@ class CardSet
             'cardIdentifier' => $this->getCardIdentifier(),
             'title' => $this->getTitle(),
             'rarity' => $this->getRarity(),
+            'lang' => $this->getLang(),
         ];
     }
 }

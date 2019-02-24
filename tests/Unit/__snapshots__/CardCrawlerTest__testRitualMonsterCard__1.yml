@@ -3,83 +3,100 @@
     cardIdentifier: DEC08
     title: 'SPEED DUEL STARTER DECK: DESTINY MASTERS'
     rarity: Common
+    lang: de
 -
     setIdentifier: LED2
     cardIdentifier: DE000
     title: 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'
     rarity: Common
+    lang: de
 -
     setIdentifier: MIL1
     cardIdentifier: DE008
     title: 'MILLENNIUM PACK'
     rarity: Common
+    lang: de
 -
     setIdentifier: LCYW
     cardIdentifier: DE113
     title: 'LEGENDARY COLLECTION 3 MEGA PACK'
     rarity: Rare
+    lang: de
 -
     setIdentifier: RP01
     cardIdentifier: DE054
     title: 'RETRO PACK'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: DB1
     cardIdentifier: DE015
     title: 'DARK BEGINNING 1'
     rarity: 'Super Rare'
+    lang: de
 -
     setIdentifier: SDP
     cardIdentifier: G001
     title: 'STARTER DECK PEGASUS'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: SRL
     cardIdentifier: G029
     title: 'SPELL RULER'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: SS01
     cardIdentifier: ENC08
     title: 'SPEED DUEL STARTER DECK: DESTINY MASTERS'
     rarity: Common
+    lang: en
 -
     setIdentifier: LED2
     cardIdentifier: EN000
     title: 'LEGENDARY DUELISTS: ANCIENT MILLENNIUM'
     rarity: Common
+    lang: en
 -
     setIdentifier: MIL1
     cardIdentifier: EN008
     title: 'MILLENNIUM PACK'
     rarity: Common
+    lang: en
 -
     setIdentifier: LCYW
     cardIdentifier: EN113
     title: 'LEGENDARY COLLECTION 3 YUGI''S WORLD MEGA PACK'
     rarity: Rare
+    lang: en
 -
     setIdentifier: DLG1
     cardIdentifier: EN055
     title: 'DARK LEGENDS'
     rarity: 'Super Rare'
+    lang: en
 -
     setIdentifier: RP01
     cardIdentifier: EN054
     title: 'RETRO PACK'
     rarity: 'Ultra Rare'
+    lang: en
 -
     setIdentifier: DB1
     cardIdentifier: EN015
     title: 'DARK BEGINNING 1'
     rarity: 'Super Rare'
+    lang: en
 -
     setIdentifier: SDP
     cardIdentifier: '001'
     title: 'STARTER DECK PEGASUS'
     rarity: 'Ultra Rare'
+    lang: en
 -
     setIdentifier: MRL
     cardIdentifier: '029'
     title: 'SPELL RULER'
     rarity: 'Ultra Rare'
+    lang: en

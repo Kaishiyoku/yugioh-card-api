@@ -3,28 +3,34 @@
     cardIdentifier: DE068
     title: 'PREMIUM GOLD: INFINITE GOLD'
     rarity: 'Gold Rare'
+    lang: de
 -
     setIdentifier: THSF
     cardIdentifier: DE047
     title: 'THE SECRET FORCES'
     rarity: 'Super Rare'
+    lang: de
 -
     setIdentifier: ABYR
     cardIdentifier: DE084
     title: 'ABYSS RISING'
     rarity: 'Super Rare'
+    lang: de
 -
     setIdentifier: PGL3
     cardIdentifier: EN068
     title: 'PREMIUM GOLD: INFINITE GOLD'
     rarity: 'Gold Rare'
+    lang: en
 -
     setIdentifier: THSF
     cardIdentifier: EN047
     title: 'THE SECRET FORCES'
     rarity: 'Super Rare'
+    lang: en
 -
     setIdentifier: ABYR
     cardIdentifier: EN084
     title: 'ABYSS RISING'
     rarity: 'Super Rare'
+    lang: en

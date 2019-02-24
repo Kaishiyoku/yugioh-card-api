@@ -3,8 +3,10 @@
     cardIdentifier: DE042
     title: 'STRUCTURE DECK SYNCHRON EXTREME'
     rarity: 'Super Rare'
+    lang: de
 -
     setIdentifier: SDSE
     cardIdentifier: EN042
     title: 'SYNCHRON EXTREME STRUCTURE DECK'
     rarity: 'Super Rare'
+    lang: en

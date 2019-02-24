@@ -3,18 +3,22 @@
     cardIdentifier: DE029
     title: 'DARK BEGINNING 1'
     rarity: Rare
+    lang: de
 -
     setIdentifier: SRL
     cardIdentifier: G045
     title: 'SPELL RULER'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: DB1
     cardIdentifier: EN029
     title: 'DARK BEGINNING 1'
     rarity: Rare
+    lang: en
 -
     setIdentifier: MRL
     cardIdentifier: '045'
     title: 'SPELL RULER'
     rarity: 'Ultra Rare'
+    lang: en

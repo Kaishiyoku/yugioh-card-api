@@ -3,13 +3,16 @@
     cardIdentifier: DE100
     title: 'DARK BEGINNING 2'
     rarity: Rare
+    lang: de
 -
     setIdentifier: DB2
     cardIdentifier: EN100
     title: 'DARK BEGINNING 2'
     rarity: Rare
+    lang: en
 -
     setIdentifier: SJC
     cardIdentifier: EN001
     title: 'SHONEN JUMP Championship 2004'
     rarity: Common
+    lang: en

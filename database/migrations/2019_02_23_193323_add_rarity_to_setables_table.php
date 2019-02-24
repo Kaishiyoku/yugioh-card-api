@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRarityToSetableTable extends Migration
+class AddRarityToSetablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddRarityToSetableTable extends Migration
      */
     public function up()
     {
-        Schema::table('setable', function (Blueprint $table) {
+        Schema::table('setables', function (Blueprint $table) {
             $allowedRarities = [
+                'Hobby',
                 'Common',
                 'Rare',
                 'Super Rare',
@@ -22,9 +23,10 @@ class AddRarityToSetableTable extends Migration
                 'Ultimate Rare',
                 'Secret Rare',
                 'Ghost Rare',
+                'Gold Rare',
             ];
 
-            $table->enum('rarity', $allowedRarities)->default('Common');
+            $table->enum('rarity', $allowedRarities);
         });
     }
 
@@ -35,7 +37,7 @@ class AddRarityToSetableTable extends Migration
      */
     public function down()
     {
-        Schema::table('setable', function (Blueprint $table) {
+        Schema::table('setables', function (Blueprint $table) {
             $table->dropColumn('rarity');
         });
     }

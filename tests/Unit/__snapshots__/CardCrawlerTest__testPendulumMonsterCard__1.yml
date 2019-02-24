@@ -3,8 +3,10 @@
     cardIdentifier: DE001
     title: 'PENDULUM EVOLUTION'
     rarity: 'Ultra Rare'
+    lang: de
 -
     setIdentifier: PEVO
     cardIdentifier: EN001
     title: 'PENDULUM EVOLUTION'
     rarity: 'Ultra Rare'
+    lang: en
