@@ -25,6 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('horizon:snapshot')->everyFiveMinutes()
+
         $schedule->command(YuGiOhCrawlCards::class)->weeklyOn(1, '03:00');
     }
 
