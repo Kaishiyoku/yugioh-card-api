@@ -14,19 +14,7 @@ class AddRarityToSetablesTable extends Migration
     public function up()
     {
         Schema::table('setables', function (Blueprint $table) {
-            $allowedRarities = [
-                'Hobby',
-                'Common',
-                'Rare',
-                'Super Rare',
-                'Ultra Rare',
-                'Ultimate Rare',
-                'Secret Rare',
-                'Ghost Rare',
-                'Gold Rare',
-            ];
-
-            $table->enum('rarity', $allowedRarities);
+            $table->string('rarity');
         });
     }
 
