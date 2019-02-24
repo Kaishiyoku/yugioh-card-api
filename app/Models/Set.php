@@ -50,41 +50,41 @@ class Set extends Model
 
     public function monsterCards()
     {
-        return $this->morphedByMany(MonsterCard::class, 'setable');
+        return $this->morphedByMany(MonsterCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function pendulumMonsterCards()
     {
-        return $this->morphedByMany(PendulumMonsterCard::class, 'setable');
+        return $this->morphedByMany(PendulumMonsterCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function xyzMonsterCards()
     {
-        return $this->morphedByMany(XyzMonsterCard::class, 'setable');
+        return $this->morphedByMany(XyzMonsterCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function synchroMonsterCards()
     {
-        return $this->morphedByMany(SynchroMonsterCard::class, 'setable');
+        return $this->morphedByMany(SynchroMonsterCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function linkMonsterCards()
     {
-        return $this->morphedByMany(LinkMonsterCard::class, 'setable');
+        return $this->morphedByMany(LinkMonsterCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function ritualMonsterCards()
     {
-        return $this->morphedByMany(RitualMonsterCard::class, 'setable');
+        return $this->morphedByMany(RitualMonsterCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function spellCards()
     {
-        return $this->morphedByMany(SpellCard::class, 'setable');
+        return $this->morphedByMany(SpellCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 
     public function trapCards()
     {
-        return $this->morphedByMany(TrapCard::class, 'setable');
+        return $this->morphedByMany(TrapCard::class, 'setable')->withPivot('rarity', 'identifier');
     }
 }

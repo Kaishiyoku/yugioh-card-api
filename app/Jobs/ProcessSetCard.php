@@ -5,9 +5,9 @@ namespace App\Jobs;
 use App\Entities\CardSet;
 use App\Entities\SetCard;
 use App\Models\Set;
+use App\Models\Setable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -78,7 +78,11 @@ class ProcessSetCard implements ShouldQueue
 
     private function attachCardToSet($card, Set $set, CardSet $cardSet)
     {
-        $card->sets()->attach($set, ['identifier' => $cardSet->getCardIdentifier(), 'rarity' => $cardSet->getRarity()]);
+        $foundSetable = Setable::whereSetId($set->id)->whereSetableId($card->id)->first();
+
+        if (empty($foundSetable)) {
+            $card->sets()->attach($set, ['identifier' => $cardSet->getCardIdentifier(), 'rarity' => $cardSet->getRarity()]);
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 
 class Handler extends ExceptionHandler
 {
@@ -42,10 +43,17 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse|\Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
+        if ($request->ajax() || $request->wantsJson()) {
+            $message = $exception->getMessage();
+            if (is_object($message)) { $message = $message->toArray(); }
+
+            return new JsonResponse($message, $exception->getCode());
+        }
+
         return parent::render($request, $exception);
     }
 }
