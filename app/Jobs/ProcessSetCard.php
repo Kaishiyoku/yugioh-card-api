@@ -78,7 +78,7 @@ class ProcessSetCard implements ShouldQueue
 
     private function attachCardToSet($card, Set $set, CardSet $cardSet)
     {
-        $foundSetable = Setable::whereSetId($set->id)->whereSetableId($card->id)->first();
+        $foundSetable = Setable::whereSetId($set->id)->whereSetableId($card->id)->whereIdentifier($cardSet->getCardIdentifier())->first();
 
         if (empty($foundSetable)) {
             $card->sets()->attach($set, ['identifier' => $cardSet->getCardIdentifier(), 'rarity' => $cardSet->getRarity()]);
