@@ -23,52 +23,18 @@ class CardController extends Controller
             return $this->withCardSetMapper($this->withDefaultCardOperations($cardClass)->get());
         };
 
-        $monsterCards = $withMapperAndOperations(MonsterCard::class);
-        $ritualMonsterCards = $withMapperAndOperations(RitualMonsterCard::class);
-        $linkMonsterCards = $withMapperAndOperations(LinkMonsterCard::class);
-        $synchroMonsterCards = $withMapperAndOperations(SynchroMonsterCard::class);
-        $xyzMonsterCards = $withMapperAndOperations(XyzMonsterCard::class);
-        $pendulumMonsterCards = $withMapperAndOperations(PendulumMonsterCard::class);
-        $spellCards = $withMapperAndOperations(SpellCard::class);
-        $trapCards = $withMapperAndOperations(TrapCard::class);
-
-        return response()->json(compact(
-            'monsterCards',
-            'ritualMonsterCards',
-            'linkMonsterCards',
-            'synchroMonsterCards',
-            'xyzMonsterCards',
-            'pendulumMonsterCards',
-            'spellCards',
-            'trapCards'
-        ));
+        return $this->getCardsResponse($withMapperAndOperations);
     }
 
     public function search($title)
     {
-        $withMapperAndOperations = function ($cardClass, $title) {
-            return $this->withCardSetMapper($this->withDefaultSearchOperations($cardClass, $title)->get());
+        $withMapperAndOperations = function ($title) {
+            return function ($cardClass) use ($title) {
+                return $this->withCardSetMapper($this->withDefaultSearchOperations($cardClass, $title)->get());
+            };
         };
 
-        $monsterCards = $withMapperAndOperations(MonsterCard::class, $title);
-        $ritualMonsterCards = $withMapperAndOperations(RitualMonsterCard::class, $title);
-        $linkMonsterCards = $withMapperAndOperations(LinkMonsterCard::class, $title);
-        $synchroMonsterCards = $withMapperAndOperations(SynchroMonsterCard::class, $title);
-        $xyzMonsterCards = $withMapperAndOperations(XyzMonsterCard::class, $title);
-        $pendulumMonsterCards = $withMapperAndOperations(PendulumMonsterCard::class, $title);
-        $spellCards = $withMapperAndOperations(SpellCard::class, $title);
-        $trapCards = $withMapperAndOperations(TrapCard::class, $title);
-
-        return response()->json(compact(
-            'monsterCards',
-            'ritualMonsterCards',
-            'linkMonsterCards',
-            'synchroMonsterCards',
-            'xyzMonsterCards',
-            'pendulumMonsterCards',
-            'spellCards',
-            'trapCards'
-        ));
+        return $this->getCardsResponse($withMapperAndOperations($title));
     }
 
     public function getCardFromSet($identifier)
@@ -124,5 +90,28 @@ class CardController extends Controller
     {
         return $cardClass::where('title_german', 'LIKE', '%' . $title . '%')
             ->orWhere('title_english', 'LIKE', '%' . $title . '%');
+    }
+
+    private function getCardsResponse($operatorFn)
+    {
+        $monsterCards = $operatorFn(MonsterCard::class);
+        $ritualMonsterCards = $operatorFn(RitualMonsterCard::class);
+        $linkMonsterCards = $operatorFn(LinkMonsterCard::class);
+        $synchroMonsterCards = $operatorFn(SynchroMonsterCard::class);
+        $xyzMonsterCards = $operatorFn(XyzMonsterCard::class);
+        $pendulumMonsterCards = $operatorFn(PendulumMonsterCard::class);
+        $spellCards = $operatorFn(SpellCard::class);
+        $trapCards = $operatorFn(TrapCard::class);
+
+        return response()->json(compact(
+            'monsterCards',
+            'ritualMonsterCards',
+            'linkMonsterCards',
+            'synchroMonsterCards',
+            'xyzMonsterCards',
+            'pendulumMonsterCards',
+            'spellCards',
+            'trapCards'
+        ));
     }
 }
