@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Console\BaseCommand;
 use App\Helpers\ArrHelper;
 use App\Helpers\CommonHelper;
+use App\Jobs\ProcessCardImage;
 use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
 use App\Models\PendulumMonsterCard;
@@ -61,39 +62,10 @@ class YuGiOhCrawlCardImages extends BaseCommand
 
     private function fetchCardImagesFor($cardClass)
     {
-        $baseUrl = 'https://yugioh.fandom.com/wiki';
-        $cardType = Str::plural(str_replace('_card', '', Str::snake(last(explode('\\', $cardClass)))));
-
         $cards = $cardClass::all();
 
-        $converter = new CssSelectorConverter();
-
-        $cards->each(function (Model $card) use ($baseUrl, $converter, $cardType) {
-            $html = CommonHelper::getExternalContent($this->fetchCardUrl($card));
-
-            $crawler = new Crawler($html);
-
-            try {
-                $imageUrl = $crawler->filterXPath($converter->toXPath('td.cardtable-cardimage img'))->attr('src');
-
-                Storage::disk('local')->put('/card_images/' . $cardType . '/' . Str::slug($card->title_english) . '.jpg', CommonHelper::getExternalContent($imageUrl));
-
-                $this->info('Crawled image for card ' . Str::singular($cardType) . '-' . $card->id . ' "' . $card->title_english . '"');
-            } catch (\Exception $e) {
-                $errorMessage = 'Can\'t fetch image for card ' . Str::singular($cardType) . '-' . $card->id . ' "' . $card->title_english . '"';
-                $this->error($errorMessage);
-                Log::error($errorMessage);
-            }
+        $cards->each(function (Model $card) {
+            ProcessCardImage::dispatch($card);
         });
-    }
-
-    private function fetchCardUrl(Model $card)
-    {
-        $queryHtml = CommonHelper::getExternalContent('https://yugioh.fandom.com/wiki/Special:Search?query=' . urlencode($card->title_english));
-
-        $queryCrawler = new Crawler($queryHtml);
-        $converter = new CssSelectorConverter();
-
-        return $queryCrawler->filterXPath($converter->toXPath('ul.Results > li.result a'))->first()->attr('href');
     }
 }
