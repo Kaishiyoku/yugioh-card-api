@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Entities\CardSet;
 use App\Entities\SetCard;
+use App\Helpers\CrawlHelper;
 use App\Models\Set;
 use App\Models\Setable;
 use Illuminate\Bus\Queueable;
@@ -38,7 +39,7 @@ class ProcessSetCard implements ShouldQueue
      */
     public function handle()
     {
-        $cardCarrier = fetchCard($this->setCard->getAttribute(), $this->setCard->getCardInfo(), $this->setCard->getUrl());
+        $cardCarrier = CrawlHelper::fetchCard($this->setCard->getAttribute(), $this->setCard->getCardInfo(), $this->setCard->getUrl());
         $card = $cardCarrier->getCard();
         $cardSets = $cardCarrier->getCardSets();
 

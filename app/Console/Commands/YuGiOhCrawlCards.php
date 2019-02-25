@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
 use App\Entities\SetLink;
+use App\Helpers\CrawlHelper;
 use App\Jobs\ProcessSetLink;
 use Illuminate\Support\Str;
 
@@ -33,7 +34,7 @@ class YuGiOhCrawlCards extends BaseCommand
         $baseUrl = 'https://www.db.yugioh-card.com';
         $setName = $this->argument('setName');
 
-        $setLinks = fetchAllSetLinks($baseUrl);
+        $setLinks = CrawlHelper::fetchAllSetLinks($baseUrl);
 
         if (!empty($setName)) {
             $setLinks = $setLinks->filter(function (SetLink $item) use ($setName) {

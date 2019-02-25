@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Entities\SetCard;
 use App\Entities\SetLink;
+use App\Helpers\CrawlHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -43,7 +44,7 @@ class ProcessSetLink implements ShouldQueue
      */
     public function handle()
     {
-        $setCards = fetchSetCards($this->baseUrl, $this->setLink->getUrl());
+        $setCards = CrawlHelper::fetchSetCards($this->baseUrl, $this->setLink->getUrl());
 
         $setCards->each(function (SetCard $item) {
             ProcessSetCard::dispatch($item);
