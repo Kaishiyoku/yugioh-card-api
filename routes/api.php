@@ -21,6 +21,7 @@ Route::prefix('v1')->middleware('api')->name('api.')->group(function () {
 
     Route::get('/sets', 'Api\v1\SetController@index')->name('sets.index');
     Route::get('/sets/search/{term}', 'Api\v1\SetController@search')->name('sets.search');
+    Route::get('/sets/{identifier}', 'Api\v1\SetController@show')->name('sets.show');
 
     Route::Get('/statistics', 'Api\v1\StatisticController@index')->name('statistics.index');
 });

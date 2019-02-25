@@ -15,6 +15,13 @@ class SetController extends Controller
         return response()->json($sets);
     }
 
+    public function show($identifier)
+    {
+        $set = Set::whereIdentifier($identifier)->first();
+
+        return response()->json($set);
+    }
+
     public function search($term)
     {
         $sets = Set::where('title_german', 'LIKE', '%' . $term . '%')
