@@ -62,11 +62,26 @@ class ProcessCardImage implements ShouldQueue
 
     private static function fetchCardUrl(Model $card)
     {
-        $queryHtml = CommonHelper::getExternalContent('https://yugioh.fandom.com/wiki/Special:Search?query=' . urlencode($card->title_english));
+        $cardTitle = self::adjustCardTitleForImageFetching($card->title_english);
+        $queryHtml = CommonHelper::getExternalContent('https://yugioh.fandom.com/wiki/Special:Search?query=' . urlencode($cardTitle));
 
         $queryCrawler = new Crawler($queryHtml);
         $converter = new CssSelectorConverter();
 
         return $queryCrawler->filterXPath($converter->toXPath('ul.Results > li.result a'))->first()->attr('href');
+    }
+
+    public static function adjustCardTitleForImageFetching($title)
+    {
+        $title = str_replace('#', '', $title);
+
+        preg_match('/\(Updated from: .{1,200}\)$/', $title, $matches);
+
+        if (count($matches) == 1) {
+            $title = str_replace('(Updated from: ', '', $matches[0]);
+            $title = rtrim($title, ')');
+        }
+
+        return $title;
     }
 }
