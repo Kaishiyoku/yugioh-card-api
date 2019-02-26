@@ -43,7 +43,7 @@ class ProcessCardImage implements ShouldQueue
      */
     public function handle()
     {
-        $cardType = Str::plural(str_replace('_card', '', Str::snake(last(explode('\\', get_class($this->card))))));
+        $cardType = self::getCardType($this->card);
         $html = CommonHelper::getExternalContent(self::fetchCardUrl($this->card));
 
         $crawler = new Crawler($html);
@@ -52,7 +52,7 @@ class ProcessCardImage implements ShouldQueue
         try {
             $imageUrl = $crawler->filterXPath($converter->toXPath('td.cardtable-cardimage img'))->attr('src');
 
-            Storage::disk('local')->put('/card_images/' . $cardType . '/' . Str::slug($this->card->title_english) . '.jpg', CommonHelper::getExternalContent($imageUrl));
+            Storage::disk('local')->put('/card_images/' . $cardType . '/' . Str::slug($this->card->title_english) . '.png', CommonHelper::getExternalContent($imageUrl));
         } catch (\Exception $e) {
             $this->card->failedCardImageCrawlings()->save(new FailedCardImageCrawling());
 
@@ -83,5 +83,10 @@ class ProcessCardImage implements ShouldQueue
         }
 
         return $title;
+    }
+
+    public static function getCardType(Model $card)
+    {
+        return Str::plural(str_replace('_card', '', Str::snake(last(explode('\\', get_class($card))))));
     }
 }
