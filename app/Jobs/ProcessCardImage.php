@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Helpers\CommonHelper;
+use App\Models\FailedCardImageCrawling;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
@@ -53,6 +54,8 @@ class ProcessCardImage implements ShouldQueue
 
             Storage::disk('local')->put('/card_images/' . $cardType . '/' . Str::slug($this->card->title_english) . '.jpg', CommonHelper::getExternalContent($imageUrl));
         } catch (\Exception $e) {
+            $this->card->failedCardImageCrawlings()->save(new FailedCardImageCrawling());
+
             Log::error('Can\'t fetch image for card ' . Str::singular($cardType) . '-' . $this->card->id . ' "' . $this->card->title_english . '"');
         }
     }

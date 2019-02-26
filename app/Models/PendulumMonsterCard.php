@@ -50,6 +50,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PendulumMonsterCard whereIsForbidden($value)
  * @property bool $is_limited
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PendulumMonsterCard whereIsLimited($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FailedCardImageCrawling[] $failedCardImageCrawlings
  */
 class PendulumMonsterCard extends Model
 {
@@ -90,5 +91,10 @@ class PendulumMonsterCard extends Model
     public function sets()
     {
         return $this->morphToMany(Set::class, 'setable');
+    }
+
+    public function failedCardImageCrawlings()
+    {
+        return $this->morphMany(FailedCardImageCrawling::class, 'cardable');
     }
 }
