@@ -13,6 +13,9 @@
             {{ Html::linkRoute('api.cards.get_card_from_set', route('api.cards.get_card_from_set', ['srl-g029'], false), ['srl-g029']) }}
         </li>
         <li>
+            {{ Html::linkRoute('api.cards.image', route('api.cards.image', ['srl-g029'], false), ['srl-g029']) }}
+        </li>
+        <li>
             {{ Html::linkRoute('api.cards.search', route('api.cards.search', ['relinquished'], false), ['relinquished']) }}
         </li>
     </ul>
