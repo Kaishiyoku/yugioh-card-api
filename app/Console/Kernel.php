@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\YuGiOhCrawlCardImages;
 use App\Console\Commands\YuGiOhCrawlCards;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
 
         $schedule->command(YuGiOhCrawlCards::class)->weeklyOn(1, '03:00');
+        $schedule->command(YuGiOhCrawlCardImages::class)->weeklyOn(1, '05:00');
     }
 
     /**
