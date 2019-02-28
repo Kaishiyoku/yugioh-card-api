@@ -23,10 +23,10 @@ class CardController extends Controller
     public function index()
     {
         $withMapperAndOperations = function ($cardClass) {
-            return $this->withCardSetMapper($this->withDefaultCardOperations($cardClass)->get());
+            return $this->withCardSetMapper($this->withDefaultCardOperations($cardClass, true));
         };
 
-        return CardController::getCardsResponse($withMapperAndOperations);
+        return CardController::getCardsResponse($withMapperAndOperations, true);
     }
 
     public function search($title)
@@ -98,10 +98,16 @@ class CardController extends Controller
         return Image::make($imageContent)->response('png', 100);
     }
 
-    private function withDefaultCardOperations($cardClass)
+    private function withDefaultCardOperations($cardClass, $withPagination = false)
     {
-        return $cardClass::orderBy('title_german')
+        $model = $cardClass::orderBy('title_german')
             ->orderBy('title_english');
+
+        if ($withPagination) {
+            $model = $model->paginate(env('CARDS_PER_PAGE'));
+        }
+
+        return $model;
     }
 
     private function withCardSetMapper($card)
@@ -126,26 +132,42 @@ class CardController extends Controller
             ->orWhere('title_english', 'LIKE', '%' . $title . '%');
     }
 
-    private static function getCardsResponse($operatorFn)
+    private static function getCardsResponse($operatorFn, $withPagination = false)
     {
-        $monsterCards = $operatorFn(MonsterCard::class);
-        $ritualMonsterCards = $operatorFn(RitualMonsterCard::class);
-        $linkMonsterCards = $operatorFn(LinkMonsterCard::class);
-        $synchroMonsterCards = $operatorFn(SynchroMonsterCard::class);
-        $xyzMonsterCards = $operatorFn(XyzMonsterCard::class);
-        $pendulumMonsterCards = $operatorFn(PendulumMonsterCard::class);
-        $spellCards = $operatorFn(SpellCard::class);
-        $trapCards = $operatorFn(TrapCard::class);
+        $perPage = env('CARDS_PER_PAGE');
+        $cardClasses = collect([
+            MonsterCard::class,
+            RitualMonsterCard::class,
+            LinkMonsterCard::class,
+            SynchroMonsterCard::class,
+            XyzMonsterCard::class,
+            PendulumMonsterCard::class,
+            SpellCard::class,
+            TrapCard::class,
+        ]);
 
-        return response()->json(compact(
-            'monsterCards',
-            'ritualMonsterCards',
-            'linkMonsterCards',
-            'synchroMonsterCards',
-            'xyzMonsterCards',
-            'pendulumMonsterCards',
-            'spellCards',
-            'trapCards'
-        ));
+        $cardResults = $cardClasses->mapWithKeys(function ($cardClass) use ($operatorFn) {
+            $cardName = Str::snake(Str::plural(array_last(explode("\\", $cardClass))));
+
+            return [$cardName => $operatorFn($cardClass)];
+        });
+
+        $additionalValues = [];
+
+        $lastPage = $cardClasses->reduce(function ($carry, $cardClass) use ($perPage) {
+            $lastPage = $cardClass::paginate($perPage)->lastPage();
+
+            return $lastPage > $carry ? $lastPage : $carry;
+        }, 1);
+
+        if ($withPagination) {
+            $additionalValues = [
+                'info' => [
+                    'last_page' => $lastPage,
+                ],
+            ];
+        }
+
+        return response()->json(array_merge($additionalValues, $cardResults->toArray()));
     }
 }
