@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Console\BaseCommand;
 use App\Helpers\ArrHelper;
-use App\Helpers\CommonHelper;
 use App\Jobs\ProcessCardImage;
 use App\Models\LinkMonsterCard;
 use App\Models\MonsterCard;
@@ -15,11 +14,6 @@ use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Symfony\Component\CssSelector\CssSelectorConverter;
-use Symfony\Component\DomCrawler\Crawler;
 
 class YuGiOhCrawlCardImages extends BaseCommand
 {

@@ -15,6 +15,7 @@ use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
 use Illuminate\Support\Collection;
 use Spatie\Snapshots\MatchesSnapshots;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 class CardImageCrawlerTest extends TestCase
@@ -32,5 +33,13 @@ class CardImageCrawlerTest extends TestCase
         $actualB = ProcessCardImage::adjustCardTitleForImageFetching($expectedB);
 
         $this->assertEquals($expectedB, $actualB);
+    }
+
+    public function testAdjustCardTitleForImageFetchingSpecialCase()
+    {
+        $expectedA = 'Red Nova (Card)';
+        $actualA = ProcessCardImage::adjustCardTitleForImageFetching('Red Nova');
+
+        $this->assertEquals($expectedA, $actualA);
     }
 }

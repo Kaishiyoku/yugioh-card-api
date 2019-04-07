@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -76,6 +77,21 @@ class ProcessCardImage implements ShouldQueue
         $title = str_replace('#', '', $title);
 
         preg_match('/\(Updated from: .{1,200}\)$/', $title, $matches);
+
+        // special cases (mostly where also other articles with the same name as the card title exist)
+        $specialCases = [
+            'Red Nova' => 'Red Nova (Card)'
+        ];
+
+        $foundSpecialCase = Arr::first(Arr::where($specialCases, function ($value, $key) use ($title) {
+            return Str::lower($key) == Str::lower($title);
+        }));
+
+        if (!empty($foundSpecialCase)) {
+            $title = $foundSpecialCase;
+
+            return $title;
+        }
 
         if (count($matches) == 1) {
             $title = str_replace('(Updated from: ', '', $matches[0]);
