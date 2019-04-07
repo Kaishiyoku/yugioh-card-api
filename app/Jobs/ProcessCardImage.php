@@ -80,17 +80,28 @@ class ProcessCardImage implements ShouldQueue
 
         // special cases (mostly where also other articles with the same name as the card title exist)
         $specialCases = [
-            'Red Nova' => 'Red Nova (Card)'
+            'Red Nova',
+            'Lillybot',
+            'Orbital 7',
+            'Ancient Gear',
+            'Pharaoh\'s Servant',
+            'Princess Cologne',
+            'Duelist Alliance',
+            'Generation Force',
+            'Dragunity Legion',
+            'Cybernetic Revolution',
+            'Return',
+            'Labyrinth of Nightmare',
+            'Light of Destruction',
+            'Synchro Material',
         ];
 
         $foundSpecialCase = Arr::first(Arr::where($specialCases, function ($value, $key) use ($title) {
-            return Str::lower($key) == Str::lower($title);
+            return Str::lower($value) == Str::lower($title);
         }));
 
         if (!empty($foundSpecialCase)) {
-            $title = $foundSpecialCase;
-
-            return $title;
+            return "{$title} (card)";
         }
 
         if (count($matches) == 1) {

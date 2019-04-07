@@ -13,6 +13,7 @@ use App\Models\SpellCard;
 use App\Models\SynchroMonsterCard;
 use App\Models\TrapCard;
 use App\Models\XyzMonsterCard;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Component\Process\Process;
@@ -37,9 +38,24 @@ class CardImageCrawlerTest extends TestCase
 
     public function testAdjustCardTitleForImageFetchingSpecialCase()
     {
-        $expectedA = 'Red Nova (Card)';
-        $actualA = ProcessCardImage::adjustCardTitleForImageFetching('Red Nova');
+        $originalArr = [
+            'Red Nova',
+            'Lillybot',
+            'Ancient Gear',
+            'Pharaoh\'s Servant',
+            'Princess Cologne',
+            'Duelist Alliance',
+            'Generation Force',
+            'Dragunity Legion',
+            'Cybernetic Revolution',
+            'Return',
+            'Labyrinth of Nightmare',
+            'Light of Destruction',
+            'Synchro Material',
+        ];
 
-        $this->assertEquals($expectedA, $actualA);
+        foreach ($originalArr as $key => $original) {
+            $this->assertEquals("{$original} (card)", ProcessCardImage::adjustCardTitleForImageFetching($original));
+        }
     }
 }
